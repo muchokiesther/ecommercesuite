@@ -6,6 +6,7 @@ import bcrypt from 'bcrypt'
 import {regSchema} from "../Helpers/usersValidation";
 import jwt from 'jsonwebtoken'
 import { Console, error, log } from "console";
+
 interface ExtendedRequest extends Request{
 body:{
     userName:string
@@ -34,13 +35,14 @@ export const addUser=async (req:Request, res:Response)=>{
         let id = uid() // a unique id
 
         const { userName, fullName,  email, phoneNumber,  password } =req.body
+
         //validation my registered users
        const {error}= regSchema.validate (req.body)
         if(error){
             return res.status(404).json(error.details[0].message)
         }
 
-    
+
         let hashedPassword = await bcrypt.hash(password,10)  //hashing your password
         //connect to db
         const pool = await mssql.connect(sqlConfig)
@@ -81,6 +83,7 @@ export const getUsersById:RequestHandler<{id:String}>=async(req,res)=>{
     try{
             const{id}=req.params
            const pool = await mssql.connect(sqlConfig)
+
            let user:User =(await(await pool.request())
            .input('id', id)
            .execute('getUserById')).recordset[0]
@@ -107,7 +110,6 @@ export const getUsersByEmail:RequestHandler<{email:string}>=async(req,res)=>{
            
            return res.status(404).json({message:"user not found"})
 
-     
    
            }catch(error:any){
            return res.status(500).json(error.message)
@@ -144,7 +146,6 @@ export const getUsersByEmail:RequestHandler<{email:string}>=async(req,res)=>{
    
 
    //delete User
-
    export const deleteUser = async (req:Request <{id:string}> , res:Response) =>{
 
     try {
@@ -160,6 +161,7 @@ export const getUsersByEmail:RequestHandler<{email:string}>=async(req,res)=>{
     } catch (error:any) {
         return res.status(500).json(error.message)
     } 
+
    }
 
 
