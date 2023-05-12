@@ -3,6 +3,10 @@ import mssql from 'mssql'
 import { sqlConfig } from "../config";
 import {v4 as uid} from 'uuid'
 import bcrypt from 'bcrypt'
+import {regSchema} from "../Helpers/usersValidation";
+import jwt from 'jsonwebtoken'
+import { Console, error, log } from "console";
+
 interface ExtendedRequest extends Request{
 body:{
     userName:string
@@ -31,6 +35,14 @@ export const addUser=async (req:Request, res:Response)=>{
         let id = uid() // a unique id
 
         const { userName, fullName,  email, phoneNumber,  password } =req.body
+
+        //validation my registered users
+       const {error}= regSchema.validate (req.body)
+        if(error){
+            return res.status(404).json(error.details[0].message)
+        }
+
+
         let hashedPassword = await bcrypt.hash(password,10)  //hashing your password
         //connect to db
         const pool = await mssql.connect(sqlConfig)
@@ -56,13 +68,12 @@ export const addUser=async (req:Request, res:Response)=>{
 export const getAllUsers:RequestHandler=async(req,res)=>{
  try{
         const pool = await mssql.connect(sqlConfig)
-        // let users:User[] =(await(pool.request()).query('SELECT * FROM users')).recordset
+       
         let users:User[] =(await(pool.request()).execute('getUsers')).recordset
         res.status(200).json(users)
 
-        }
-        catch(error:any){
-            return res.status(500).json(error.message)
+        }catch(error:any){
+        return res.status(500).json(error.message)
     }
 }
 
@@ -72,13 +83,33 @@ export const getUsersById:RequestHandler<{id:String}>=async(req,res)=>{
     try{
             const{id}=req.params
            const pool = await mssql.connect(sqlConfig)
-           let user:User =(await(pool.request())
+
+           let user:User =(await(await pool.request())
            .input('id', id)
            .execute('getUserById')).recordset[0]
-           if(!user){
-            return res.status(404).json("user not found")
+           res.status(200).json(user)
+   
+           }catch(error:any){
+           return res.status(500).json(error.message)
+       }
+   }
+
+   //get one user by email
+export const getUsersByEmail:RequestHandler<{email:string}>=async(req,res)=>{
+    try{
+            const{email}=req.params
+           const pool = await mssql.connect(sqlConfig)
+           let user:User[] =(await(pool.request())
+           .input('email', email)
+           .execute('getUserByEmail')).recordset
+           if(user){
+         
+            return res.status(200).json(user)
+
            }
-           return res.status(200).json(user)
+           
+           return res.status(404).json({message:"user not found"})
+
    
            }catch(error:any){
            return res.status(500).json(error.message)
@@ -96,6 +127,7 @@ export const getUsersById:RequestHandler<{id:String}>=async(req,res)=>{
             .execute('getUserById')).recordset
             if(!user.length){
                 return res.status(404).json({message:"User not found"})
+
             }
             const {userName, fullName, email, phoneNumber, password} = req.body
             await pool.request()
@@ -129,4 +161,36 @@ export const getUsersById:RequestHandler<{id:String}>=async(req,res)=>{
     } catch (error:any) {
         return res.status(500).json(error.message)
     } 
+
    }
+
+
+   export const loginUser = async(req:Request, res:Response) => {
+        try {
+            const pool = await mssql.connect(sqlConfig)
+            const {email,password} = req.body as {email:string, password:string}
+            let user:User[] = await(await pool.request()
+            .input('email',email)
+            .execute('getUserByEmail')).recordset
+            if(!user[0]){
+                return res.status(404).json({messsage:"user not found"})
+            }
+            let validpassword = await bcrypt.compare(password, user[0].password)
+            if(!validpassword){
+                return res.status(404).json({message:"user not found"})
+            }
+            const payload = user.map(usr => {
+                const {password,isDeleted,phoneNumber,...rest} = usr
+                return rest
+            })
+            // tokening
+            const token = jwt.sign(payload[0], <string>process.env.SECRET_KEY, {expiresIn:'172800s'})
+            return res.json({message:"login successfull!!", token})
+        } catch (error:any) {
+            return res.status(500).json(error.message)
+        }
+   }
+
+
+
+   

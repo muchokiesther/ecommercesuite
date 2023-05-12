@@ -47,4 +47,4 @@ encrypt: false, // for azure
 
 // })
 
-console.log(process.env.DB_SERVER);
+
