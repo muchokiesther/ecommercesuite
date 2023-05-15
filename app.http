@@ -1,11 +1,77 @@
 
-#####
-/// products endpoints
-POST http://localhost:4000/products
+###
+POST   http://localhost:4000/users
 Content-Type: application/json
 
 
 {
+    "userName":"Wam",
+    "fullName":"esther Wamuyu ",
+    "email":"mucho.ijones@gmail.com",
+    "phoneNumber":"078912323",
+    "password":"Wamuyu@2023"
+}
+
+
+###
+GET   http://localhost:4000/users
+
+
+###
+//getting user by email
+GET http://localhost:4000/users/email/admin@example.com
+
+
+
+###
+GET   http://localhost:4000/users/8d34d657-111f-4126-b976-dcd355ef5413
+
+
+###
+
+PUT  http://localhost:4000/users/8d34d657-111f-4126-b976-dcd355ef5413
+Content-Type: application/json
+
+{
+    "userName":"george Githaiga",
+    "fullName":"George88 ",
+    "email":"ggk8@gmail.com",
+    "phoneNumber":"0712123556",
+    "password":"452456789"
+}
+
+###
+DELETE http://localhost:4000/users/67bd9253-8a1d-4ea0-83ef-446bbbe179d4
+
+
+###
+POST http://localhost:4000/users/login/
+Content-Type:   application/json
+
+{
+    "password":"Wamuyu@2023",
+    "email": "mucho.ijones@gmail.com"
+      
+}
+
+###
+POST http://localhost:4000/products
+Content-Type: application/json
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwNjU1YzkyLTIzYzctNGEwYi05MDg5LTAwNTQ0NDc0NTMzMSIsInVzZXJOYW1lIjoiV2FtIiwiZnVsbE5hbWUiOiJlc3RoZXIgV2FtdXl1ICIsImVtYWlsIjoibXVjaG8uaWpvbmVzQGdtYWlsLmNvbSIsInJvbGVzIjoidXNlciIsImVtYWlsU2VudCI6MCwiaWF0IjoxNjg0MTQ1MTczLCJleHAiOjE2ODQzMTc5NzN9.tKuN_NRLtrdEi1va2i_5G6auLNmr8-t1pZ7mt9gr5Ow
+
+{
+
+"productName" :"seates",
+"productDescription" :"5 seater",
+"productImage" :"DDDD",
+"price":"20000"
+}
+
+
+
+#####
+/// products endpoints
+POST http://localhost:4000/products
     "pname":"Fish  & Omena",
     "pdescription": "straight from the fisher's hook",
     "pimage": "link",
@@ -69,8 +135,7 @@ Content-Type: application/json
     "pdescription": "An Indian classic comedy",
     "price": 50
 }
-
-
 #####
+
 // remove item from list
 DELETE http://localhost:4000/cart/564

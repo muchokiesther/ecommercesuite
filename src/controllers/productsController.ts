@@ -30,7 +30,7 @@ interface ExtendedRequest extends Request {
     info?: DecodedData
     params: {
         id: string;
-        productid: string;
+        pid: string;
     }
   }
   
@@ -130,7 +130,7 @@ export const UpdateProduct = async(req:Request<{id:string}>, res:Response) => {
 }
 
 
-export const deleteProduct = async(req:Request<{id:string}>,res:Response)=> {
+export const deleteProduct = async(req:ExtendedRequest, res:Response) => {
 
     try {
        
@@ -147,13 +147,17 @@ export const deleteProduct = async(req:Request<{id:string}>,res:Response)=> {
         }
 
         if (req.info?.roles == 'admin') {
-        await pool.request().input('pid',pid).execute('deleteproduct')
+
+        await pool.request().input('pid',id).execute('deleteproduct')
+
 
         await pool.request()
         .input('pid',id)
         .execute('deleteProduct')
 
         return res.status(200).json({message:"product deleted successfully"})
+        }else{
+            return res.status(403).json({ message: 'Access denied' });
         }
     } catch (error:any) {
         return res.status(500).json(error.message)
