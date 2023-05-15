@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken'
 import {NextFunction,Request,Response} from 'express'
 import dotenv from 'dotenv'
 import path from 'path'
+import { userInfo } from 'os'
 
 
 dotenv.config({path:path.resolve(__dirname, '../../.env')})
@@ -24,7 +25,7 @@ export const verifyToken = (req:ExtendedRequest, res:Response, next:NextFunction
             return res.status(401).json({message:'unathorized'})
         }
         // is token expired or valid
-        const dedodedData = jwt.verify(token, <string>process.env.SECRET_KEY ) as DecodeData
+        const dedodedData = jwt.verify(token, process.env.SECRET_KEY as string) as DecodeData
         req.info=dedodedData
         
     } catch (error:any) {

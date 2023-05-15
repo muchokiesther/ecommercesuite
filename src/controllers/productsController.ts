@@ -3,7 +3,14 @@ import mssql from 'mssql'
 import {v4 as uid} from 'uuid'
 import {sqlConfig} from '../config'
 
-
+interface DecodedData {
+    id: string
+    userName: string
+    fullName: string
+    email: string
+    phoneNumber: number
+    roles: string
+  }
 interface iProducts {
     productid:string
     productName:string
@@ -20,25 +27,40 @@ interface ExtendedRequest extends Request {
         productImage:string
         price:number
     }
-}
+    info?: DecodedData
+    params: {
+        id: string;
+        productid: string;
+    }
+  }
+  
+
 
 
 // add product
 export const addProduct = async(req:ExtendedRequest, res:Response) => {
     try {
+        console.log(req.info?.roles);
+        if ( req.info && req.info?.roles === 'admin') {
+   
+      
         let id = uid()
+        console.log(id);
+        
         const pool = await mssql.connect(sqlConfig)
         const {productName,productDescription, productImage,price} = req.body
         await pool.request()
-        .input('productid',id)
-        .input('productName',productName)
-        .input('productDescription',productDescription)
-        .input('productImage',productImage)
-        .input('price',price)
+        .input('productid', mssql.VarChar ,id)
+        .input('productName',  mssql.VarChar ,productName)
+        .input('productDescription',  mssql.VarChar ,productDescription)
+        .input('productImage',  mssql.VarChar ,productImage)
+        .input('price', mssql.Int ,price)
         .execute('addproduct')
 
         return res.status(201).json({message:"product added successfully"})
-
+        }else{
+            return res.status(403).json({ message: 'Access denied' });
+        }
     } catch (error:any) {
         // occurrence of server side error
         return res.status(500).json(error.message)
@@ -77,46 +99,56 @@ export const getallProducts = async(req:Request, res:Response) => {
 }
 
 // update product
-export const updateProduct = async(req:Request<{productid:string}>,res:Response) => {
-    try {
-        const pool = await mssql.connect(sqlConfig)
-        const {productid} = req.params
-        let product:iProducts[] = (await pool.request()
-        .input('productid',productid)
-        .execute('getproductbyid')).recordset
+export const updateProduct =  async (req: ExtendedRequest, res: Response) => {
+  try {
+    const pool = await mssql.connect(sqlConfig);
+    const { productid } = req.params;
+    let product: iProducts[] = (
+      await pool
+        .request()
+        .input('productid', productid)
+        .execute('getproductbyid')
+    ).recordset;
 
-        if(!product.length){
-            return res.status(404).json({message:"product not found"})
-        }
-        const {productName, productDescription, productImage, price} = req.body
-        await pool.request()
+    if (!product.length) {
+      return res.status(404).json({ message: 'product not found' });
+    }
+    const { productName, productDescription, productImage, price } = req.body;
+    if (req.info?.roles == 'admin') {
+      await pool.request()
         .input('productid',productid)
         .input('pname',productName)
         .input('pdesc', productDescription)
         .input('pimage',productImage)
         .input('price',price)
         .execute('updateproduct')
-        
+        }
         return res.status(200).json({message:"product updated successful"})
     } catch (error:any) {
         return res.status(500).json(error.message)
     }
 }
 
-export const deleleProduct = async(req:Request<{productid:string}>,res:Response)=> {
+export const deleleProduct = async (
+    req: ExtendedRequest,
+    res: Response
+  ) => {
     try {
+       
         const pool = await mssql.connect(sqlConfig)
         const {productid} = req.params
         let product:iProducts[] = (await pool.request()
         .input('productid',productid)
         .execute('getproductbyid')).recordset
+        
 
         if(!product.length){
             return res.status(404).json({message:"product not exists"})
         }
-
+        if (req.info?.roles == 'admin') {
         await pool.request().input('productid',productid).execute('deleteproduct')
         return res.status(200).json({message:"product deleted successfully"})
+        }
     } catch (error:any) {
         return res.status(500).json(error.message)
     }
