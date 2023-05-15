@@ -1,0 +1,76 @@
+
+#####
+/// products endpoints
+POST http://localhost:4000/products
+Content-Type: application/json
+
+
+{
+    "pname":"Fish  & Omena",
+    "pdescription": "straight from the fisher's hook",
+    "pimage": "link",
+    "price": 330
+}
+
+#####
+/// get all products
+GET http://localhost:4000/products
+
+
+#####
+/// get each product
+GET http://localhost:4000/products/cea2d354-59f3-4177-ae8e-674515c033c0
+
+
+#####
+/// update product
+PUT http://localhost:4000/products/cea2d354-59f3-4177-ae8e-674515c033c0
+Content-Type: application/json
+
+{
+    "pname": "Fish  & Omena",
+    "pdescription": "straight from the fisher's hook",
+    "pimage": "link",
+    "price": 90
+}
+
+
+#####
+/// delete product
+DELETE http://localhost:4000/products/cea2d354-59f3-4177-ae8e-674515c033c0
+
+
+#####
+// add to cart
+POST http://localhost:4000/cart/564
+Content-Type: application/json
+
+
+{
+    "pname": "3 Idiots",
+    "pdescription": "An Indian classic comedy",
+    "price": 50
+}
+
+
+#####
+// view cart items
+GET http://localhost:4000/cart
+
+
+#####
+// update cart
+PUT http://localhost:4000/cart/564
+Content-Type: application/json
+
+
+{
+    "pname": "3 Idiots",
+    "pdescription": "An Indian classic comedy",
+    "price": 50
+}
+
+
+#####
+// remove item from list
+DELETE http://localhost:4000/cart/564
