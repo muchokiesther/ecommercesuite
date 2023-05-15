@@ -1,10 +1,12 @@
-CREATE OR ALTER PROCEDURE addproduct(
-	@productid VARCHAR(200), 
-	@productname VARCHAR(155), 
-	@productdescription VARCHAR(155),
-	@productimage VARCHAR(155),
+CREATE OR ALTER PROCEDURE addProduct(
+	@pid VARCHAR(200),
+	@pname VARCHAR(155),
+	@pdescription VARCHAR(155),
+	@pimage VARCHAR(1000),
 	@price INT ) 
 AS
 BEGIN
-INSERT INTO products(productid ,productName, productDescription, productImage, price) VALUES(@productid, @productname, @productdescription ,@productimage, @price)
+INSERT INTO Products(PID ,PNAME, PDESCRIPTION, PIMAGE, PRICE) VALUES(@pid, @pname, @pdescription ,@pimage, @price)
 END
+
+EXEC addProduct @pid='23423', @pname='Chindano', @pdescription='nda thagereirie', @pimage='link', @price=75 

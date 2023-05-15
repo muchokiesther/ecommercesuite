@@ -1,0 +1,6 @@
+CREATE OR ALTER PROCEDURE removeItemfromCart(@pid VARCHAR(200))
+AS 
+BEGIN
+UPDATE CartLists SET PCOUNT=PCOUNT-1 WHERE PID=@pid 
+END
+EXEC removeItemfromCart '23423'

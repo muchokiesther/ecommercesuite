@@ -1,13 +1,16 @@
 import {Router} from 'express'
-import {addProduct, deleleProduct, getallProducts, getProduct, updateProduct} from '../controllers/productsController'
+
 import { verifyToken } from '../Middlewars/creationtaken'
+
+import {addProduct, deleteProduct, getallProducts, getProduct, UpdateProduct} from '../controllers/productsController'
+
 
 const productRoutes = Router()
 // url routes
 productRoutes.post('', verifyToken ,addProduct)
 productRoutes.get('',getallProducts)
-productRoutes.get('/:productid',getProduct)
-productRoutes.put('/:productid',updateProduct)
-productRoutes.delete('/:productid',deleleProduct)
+productRoutes.get('/:id',getProduct)
+productRoutes.delete('/:id',deleteProduct)
+productRoutes.put('/:id', UpdateProduct)
 
 export default productRoutes
