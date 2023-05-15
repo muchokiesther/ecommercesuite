@@ -148,7 +148,7 @@ export const deleteProduct = async(req:ExtendedRequest, res:Response) => {
 
         if (req.info?.roles == 'admin') {
 
-        await pool.request().input('pid',id).execute('deleteproduct')
+        
 
 
         await pool.request()
