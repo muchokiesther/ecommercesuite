@@ -1,5 +1,6 @@
-CREATE OR ALTER PROCEDURE getProductById(@productid VARCHAR(200))
+CREATE OR ALTER PROCEDURE getproductByid(@pid VARCHAR(200))
 AS 
 BEGIN
-SELECT * FROM products WHERE productid=@productid AND isDeleted=0
+SELECT * FROM Products WHERE PID=@pid AND isDeleted=0
 END
+EXEC getproductByid '23423'
