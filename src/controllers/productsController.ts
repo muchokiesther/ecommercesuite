@@ -3,7 +3,14 @@ import mssql from 'mssql'
 import {v4 as uid} from 'uuid'
 import {sqlConfig} from '../config'
 
-
+interface DecodedData {
+    id: string
+    userName: string
+    fullName: string
+    email: string
+    phoneNumber: number
+    roles: string
+  }
 interface iProducts {
     PID:string
     PNAME:string
@@ -20,16 +27,30 @@ interface ExtendedRequest extends Request {
         pimage:string
         price:number
     }
-}
+    info?: DecodedData
+    params: {
+        id: string;
+        productid: string;
+    }
+  }
+  
+
 
 
 // add product
 export const addProduct = async(req:ExtendedRequest, res:Response) => {
     try {
+        console.log(req.info?.roles);
+        if ( req.info && req.info?.roles === 'admin') {
+   
+      
         let id = uid()
+        console.log(id);
+        
         const pool = await mssql.connect(sqlConfig)
         const {pname,pdescription, pimage, price} = req.body
         await pool.request()
+
         .input('pid',id)
         .input('pname',pname)
         .input('pdescription',pdescription)
@@ -37,8 +58,11 @@ export const addProduct = async(req:ExtendedRequest, res:Response) => {
         .input('price',price)
         .execute('addProduct')
 
-        return res.status(201).json({message:"product added successfully"})
 
+        return res.status(201).json({message:"product added successfully"})
+        }else{
+            return res.status(403).json({ message: 'Access denied' });
+        }
     } catch (error:any) {
         // occurrence of server side error
         return res.status(500).json(error.message)
@@ -105,22 +129,32 @@ export const UpdateProduct = async(req:Request<{id:string}>, res:Response) => {
     }
 }
 
+
 export const deleteProduct = async(req:Request<{id:string}>,res:Response)=> {
+
     try {
+       
         const pool = await mssql.connect(sqlConfig)
         const {id} = req.params
         let product:iProducts[] = (await pool.request()
+
         .input('pid',id)
         .execute('getproductByid')).recordset
+
 
         if(!product.length){
             return res.status(404).json({message:"product not exists"})
         }
 
+        if (req.info?.roles == 'admin') {
+        await pool.request().input('productid',productid).execute('deleteproduct')
+
         await pool.request()
         .input('pid',id)
         .execute('deleteProduct')
+
         return res.status(200).json({message:"product deleted successfully"})
+        }
     } catch (error:any) {
         return res.status(500).json(error.message)
     }
