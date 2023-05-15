@@ -185,7 +185,7 @@ export const getUsersByEmail:RequestHandler<{email:string}>=async(req,res)=>{
                 return rest
             })
             // tokening
-            console.log(payload);
+            console.log();
             
             const token = jwt.sign(payload[0], <string>process.env.SECRET_KEY, {expiresIn:'172800s'})
             return res.json({message:"login successfull!!", token})

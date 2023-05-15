@@ -49,33 +49,26 @@ POST http://localhost:4000/users/login/
 Content-Type:   application/json
 
 {
-    "password":"Wamuyu@2023",
-    "email": "mucho.ijones@gmail.com"
+    "password":"Admin@2023",
+    "email": "admin2023@gmail.com"
       
 }
 
-###
-POST http://localhost:4000/products
-Content-Type: application/json
-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwNjU1YzkyLTIzYzctNGEwYi05MDg5LTAwNTQ0NDc0NTMzMSIsInVzZXJOYW1lIjoiV2FtIiwiZnVsbE5hbWUiOiJlc3RoZXIgV2FtdXl1ICIsImVtYWlsIjoibXVjaG8uaWpvbmVzQGdtYWlsLmNvbSIsInJvbGVzIjoidXNlciIsImVtYWlsU2VudCI6MCwiaWF0IjoxNjg0MTQ1MTczLCJleHAiOjE2ODQzMTc5NzN9.tKuN_NRLtrdEi1va2i_5G6auLNmr8-t1pZ7mt9gr5Ow
-
-{
-
-"productName" :"seates",
-"productDescription" :"5 seater",
-"productImage" :"DDDD",
-"price":"20000"
-}
 
 
 
 #####
 /// products endpoints
 POST http://localhost:4000/products
-    "pname":"Fish  & Omena",
-    "pdescription": "straight from the fisher's hook",
+Content-Type: application/json
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkYjg3N2UyLTI2ODUtNGUxNy1hOGZhLTcwNzNkMjU1MGQ0MyIsInVzZXJOYW1lIjoiQURNSU4iLCJmdWxsTmFtZSI6IkVzdGhlciBNdWNob2tpICIsImVtYWlsIjoiYWRtaW4yMDIzQGdtYWlsLmNvbSIsInJvbGVzIjoiYWRtaW4iLCJlbWFpbFNlbnQiOjAsImlhdCI6MTY4NDE1NDM2MiwiZXhwIjoxNjg0MzI3MTYyfQ.r6n5TVf0nniaJgX7plnFDFSduhW51My_75jFyR-IfG4 
+
+
+{
+    "pname":"Grapeeees",
+    "pdescription": "straight from the farm",
     "pimage": "link",
-    "price": 330
+    "price": 230
 }
 
 #####
@@ -139,3 +132,39 @@ Content-Type: application/json
 
 // remove item from list
 DELETE http://localhost:4000/cart/564
+
+###
+POST http://localhost:4000/orders
+Content-Type: application/json
+
+{   "pid":"253eb490-4687-47cb-98a8-fb3fbbf1032",
+    "pname": "Grapeeees",
+    "pdescription": "straight from the farm",
+    "pimage": "link",
+    "price": 90,
+    "pcount":5
+}
+
+###
+
+GET http://localhost:4000/orders/67277ed1-6829-470b-9ffc-46bd40b7da44
+
+###
+DELETE http://localhost:4000/orders/1422
+
+
+####
+// get all 
+GET http://localhost:4000/orders
+
+###
+PUT http://localhost:4000/orders/67277ed1-6829-470b-9ffc-46bd40b7da44
+Content-Type: application/json
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkYjg3N2UyLTI2ODUtNGUxNy1hOGZhLTcwNzNkMjU1MGQ0MyIsInVzZXJOYW1lIjoiQURNSU4iLCJmdWxsTmFtZSI6IkVzdGhlciBNdWNob2tpICIsImVtYWlsIjoiYWRtaW4yMDIzQGdtYWlsLmNvbSIsInJvbGVzIjoiYWRtaW4iLCJlbWFpbFNlbnQiOjAsImlhdCI6MTY4NDE1NDM2MiwiZXhwIjoxNjg0MzI3MTYyfQ.r6n5TVf0nniaJgX7plnFDFSduhW51My_75jFyR-IfG4 
+
+{   
+      "pid": "253eb490-4687-47cb-98a8-fb3fbbf1032",
+    "pname": "Grapeeees",
+    "price": 210,
+    "pcount": 15
+}
