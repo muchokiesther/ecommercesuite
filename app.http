@@ -1,5 +1,4 @@
 
-
 ###
 POST   http://localhost:4000/users
 Content-Type: application/json
@@ -56,7 +55,7 @@ Content-Type:   application/json
 }
 
 ###
-POST http://localhost:4000/product
+POST http://localhost:4000/products
 Content-Type: application/json
 token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwNjU1YzkyLTIzYzctNGEwYi05MDg5LTAwNTQ0NDc0NTMzMSIsInVzZXJOYW1lIjoiV2FtIiwiZnVsbE5hbWUiOiJlc3RoZXIgV2FtdXl1ICIsImVtYWlsIjoibXVjaG8uaWpvbmVzQGdtYWlsLmNvbSIsInJvbGVzIjoidXNlciIsImVtYWlsU2VudCI6MCwiaWF0IjoxNjg0MTQ1MTczLCJleHAiOjE2ODQzMTc5NzN9.tKuN_NRLtrdEi1va2i_5G6auLNmr8-t1pZ7mt9gr5Ow
 
@@ -70,29 +69,73 @@ token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwNjU1YzkyLTIzYzctNGEwYi05M
 
 
 
-###
-GET http://localhost:4000/product
+#####
+/// products endpoints
+POST http://localhost:4000/products
+    "pname":"Fish  & Omena",
+    "pdescription": "straight from the fisher's hook",
+    "pimage": "link",
+    "price": 330
+}
+
+#####
+/// get all products
+GET http://localhost:4000/products
 
 
 #####
 /// get each product
-GET http://localhost:4000/product/bf5a8e20-5e86-4a3e-a9ee-b664d78a7147
+GET http://localhost:4000/products/cea2d354-59f3-4177-ae8e-674515c033c0
 
 
 #####
 /// update product
-PUT http://localhost:4000/product/bf5a8e20-5e86-4a3e-a9ee-b664d78a7147
+PUT http://localhost:4000/products/cea2d354-59f3-4177-ae8e-674515c033c0
 Content-Type: application/json
 
 {
-    "productName":"Brown bread Super Loaf",
-    "productDescription": "never say bread say superloaf",
-    "productImage": "link",
-    "price": 70
+    "pname": "Fish  & Omena",
+    "pdescription": "straight from the fisher's hook",
+    "pimage": "link",
+    "price": 90
 }
 
 
 #####
 /// delete product
-DELETE http://localhost:4000/product/bf5a8e20-5e86-4a3e-a9ee-b664d78a7147
+DELETE http://localhost:4000/products/cea2d354-59f3-4177-ae8e-674515c033c0
 
+
+#####
+// add to cart
+POST http://localhost:4000/cart/564
+Content-Type: application/json
+
+
+{
+    "pname": "3 Idiots",
+    "pdescription": "An Indian classic comedy",
+    "price": 50
+}
+
+
+#####
+// view cart items
+GET http://localhost:4000/cart
+
+
+#####
+// update cart
+PUT http://localhost:4000/cart/564
+Content-Type: application/json
+
+
+{
+    "pname": "3 Idiots",
+    "pdescription": "An Indian classic comedy",
+    "price": 50
+}
+#####
+
+// remove item from list
+DELETE http://localhost:4000/cart/564
