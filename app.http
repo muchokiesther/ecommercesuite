@@ -107,13 +107,14 @@ token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQ1MTdkODFjLWY5M2UtNDc1NS1hY
 
 #####
 // add to cart
-POST http://localhost:4000/cart/124
+POST http://localhost:4000/cart/155
 Content-Type: application/json
 
 
 {
-    "pname": "samsona veg",
-    "pdescription": "An Indian meal",
+  
+    "pname": "skims",
+    "pdescription": "A cloth that fits anyone ",
     "price": 50
 }
 
@@ -125,19 +126,20 @@ GET http://localhost:4000/cart
 
 #####
 // update cart
-PUT http://localhost:4000/cart/564
+PUT http://localhost:4000/cart/125
 Content-Type: application/json
 
 
 {
-    "pname": "chicken",
-    "pdescription": "An Indian curry",
+    "pname": "dozen",
+    "pdescription": "A  curry thick glaze",
     "price": 50
+    
 }
 #####
 
 // remove item from list
-DELETE http://localhost:4000/cart/564
+DELETE http://localhost:4000/cart/55
 
 ###
 POST http://localhost:4000/orders
@@ -177,7 +179,7 @@ token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkYjg3N2UyLTI2ODUtNGUxNy1hO
     "pname": "frions",
     "price": 210,
     "pcount": 150,
-      "status":"deleivered"
+    "status":"deleivered"
 }
 
 ###

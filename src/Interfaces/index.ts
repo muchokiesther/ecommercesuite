@@ -95,12 +95,14 @@ export interface ordersExtendedRequest extends Request {
         id: string;
         pid:string;
         orderid:string
+        cartid:string
     }
   }
 
   //from cart controllers
  export interface iCart {
     PID:string
+    CARTID:string
     PNAME:string
     PDESCRIPTION:string
     PRICE:number
@@ -109,7 +111,7 @@ export interface ordersExtendedRequest extends Request {
 
 export interface cartExtendedRequest extends Request {
     body: {
-    
+      cartid:string
         pname:string
         pdescription:string
         price:number
