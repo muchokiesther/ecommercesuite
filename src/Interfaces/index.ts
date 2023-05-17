@@ -78,6 +78,7 @@ export interface iorders {
     PCOUNT:string
     PRICE:number
     ISDELETED: number
+    OrdersStatus:string
 }
 
 export interface ordersExtendedRequest extends Request {
@@ -86,6 +87,7 @@ export interface ordersExtendedRequest extends Request {
         pname:string
         price:number
         pcount:number
+        status:string
 
     }
     info?: DecodedData
@@ -107,6 +109,7 @@ export interface ordersExtendedRequest extends Request {
 
 export interface cartExtendedRequest extends Request {
     body: {
+    
         pname:string
         pdescription:string
         price:number
