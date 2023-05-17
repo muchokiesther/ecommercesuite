@@ -2,23 +2,23 @@ import {Response,RequestHandler,Request} from 'express'
 import mssql from 'mssql'
 import {v4 as uid} from 'uuid'
 import {sqlConfig} from '../config'
+import { iCart, cartExtendedRequest } from '../Interfaces'
 
+// interface iCart {
+//     PID:string
+//     PNAME:string
+//     PDESCRIPTION:string
+//     PRICE:number
+//     PCOUNT:number
+// }
 
-interface iCart {
-    PID:string
-    PNAME:string
-    PDESCRIPTION:string
-    PRICE:number
-    PCOUNT:number
-}
-
-interface ExtendedRequest extends Request {
-    body: {
-        pname:string
-        pdescription:string
-        price:number
-    }
-}
+// interface cartExtendedRequest extends Request {
+//     body: {
+//         pname:string
+//         pdescription:string
+//         price:number
+//     }
+// }
 
 
 export const addItemtoCart=async(req:Request<{id:string}>, res:Response) => {

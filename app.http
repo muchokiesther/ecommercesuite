@@ -5,10 +5,10 @@ Content-Type: application/json
 
 
 {
-    "userName":"Wam",
-    "fullName":"esther Wamuyu ",
-    "email":"mucho.ijones@gmail.com",
-    "phoneNumber":"078912323",
+    "userName":"Njamba",
+    "fullName":"Sam k muchoki ",
+    "email":"samk@gmail.com",
+    "phoneNumber":"0788912323",
     "password":"Wamuyu@2023"
 }
 
@@ -19,29 +19,29 @@ GET   http://localhost:4000/users
 
 ###
 //getting user by email
-GET http://localhost:4000/users/email/admin@example.com
+GET http://localhost:4000/users/email/kariuki@gmail.com
 
 
 
 ###
-GET   http://localhost:4000/users/8d34d657-111f-4126-b976-dcd355ef5413
+GET   http://localhost:4000/users/20655c92-23c7-4a0b-9089-005444745331
 
 
 ###
 
-PUT  http://localhost:4000/users/8d34d657-111f-4126-b976-dcd355ef5413
+PUT  http://localhost:4000/users/0587154f-8765-4b17-9a85-514f4bd87c03
 Content-Type: application/json
 
 {
-    "userName":"george Githaiga",
+    "userName":"george k Githaiga",
     "fullName":"George88 ",
     "email":"ggk8@gmail.com",
     "phoneNumber":"0712123556",
-    "password":"452456789"
+    "password":"12456789"
 }
 
 ###
-DELETE http://localhost:4000/users/67bd9253-8a1d-4ea0-83ef-446bbbe179d4
+DELETE http://localhost:4000/users/147baaa3-803c-4b36-84ab-6cf4aa12c637
 
 
 ###
@@ -50,7 +50,7 @@ Content-Type:   application/json
 
 {
     "password":"Admin@2023",
-    "email": "admin2023@gmail.com"
+    "email":"Admin2023@gmail.com"
       
 }
 
@@ -61,7 +61,7 @@ Content-Type:   application/json
 /// products endpoints
 POST http://localhost:4000/products
 Content-Type: application/json
-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkYjg3N2UyLTI2ODUtNGUxNy1hOGZhLTcwNzNkMjU1MGQ0MyIsInVzZXJOYW1lIjoiQURNSU4iLCJmdWxsTmFtZSI6IkVzdGhlciBNdWNob2tpICIsImVtYWlsIjoiYWRtaW4yMDIzQGdtYWlsLmNvbSIsInJvbGVzIjoiYWRtaW4iLCJlbWFpbFNlbnQiOjAsImlhdCI6MTY4NDE1NDM2MiwiZXhwIjoxNjg0MzI3MTYyfQ.r6n5TVf0nniaJgX7plnFDFSduhW51My_75jFyR-IfG4 
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkYjg3N2UyLTI2ODUtNGUxNy1hOGZhLTcwNzNkMjU1MGQ0MyIsInVzZXJOYW1lIjoiQURNSU4iLCJmdWxsTmFtZSI6IkVzdGhlciBNdWNob2tpICIsImVtYWlsIjoiYWRtaW4yMDIzQGdtYWlsLmNvbSIsInJvbGVzIjoiYWRtaW4iLCJlbWFpbFNlbnQiOjEsImlzUmVzZXQiOjAsImlhdCI6MTY4NDMyNzU2NywiZXhwIjoxNjg0NTAwMzY3fQ.EkTj1LUcbqwfdVvLfu0UlsGU6od95tHadZP7RNwnfyY 
 
 
 {
@@ -78,25 +78,31 @@ GET http://localhost:4000/products
 
 #####
 /// get each product
-GET http://localhost:4000/products/cea2d354-59f3-4177-ae8e-674515c033c0
+GET http://localhost:4000/products/29b1c4c0-5849-4d00-84d0-7b85f1b89452
 
 
 #####
 /// update product
-PUT http://localhost:4000/products/cea2d354-59f3-4177-ae8e-674515c033c0
+PUT http://localhost:4000/products/f06918c3-59af-447a-b730-1f284a8f52e6
 Content-Type: application/json
+Content-type:application/json
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkYjg3N2UyLTI2ODUtNGUxNy1hOGZhLTcwNzNkMjU1MGQ0MyIsInVzZXJOYW1lIjoiQURNSU4iLCJmdWxsTmFtZSI6IkVzdGhlciBNdWNob2tpICIsImVtYWlsIjoiYWRtaW4yMDIzQGdtYWlsLmNvbSIsInJvbGVzIjoiYWRtaW4iLCJlbWFpbFNlbnQiOjEsImlzUmVzZXQiOjAsImlhdCI6MTY4NDMyNzU2NywiZXhwIjoxNjg0NTAwMzY3fQ.EkTj1LUcbqwfdVvLfu0UlsGU6od95tHadZP7RNwnfyY
 
 {
-    "pname": "Fish  & Omena",
+    "pname": "Fish and Omena",
     "pdescription": "straight from the fisher's hook",
     "pimage": "link",
-    "price": 90
+    "price": 70
 }
 
 
 #####
 /// delete product
-DELETE http://localhost:4000/products/cea2d354-59f3-4177-ae8e-674515c033c0
+DELETE http://localhost:4000/products/6eed4d6a-bd21-4777-988d-64e977248642
+Content-type:application/json
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQ1MTdkODFjLWY5M2UtNDc1NS1hY2Y4LWU0NWQ1MGYxMTAzYiIsInVzZXJOYW1lIjoiTmphbWJhIiwiZnVsbE5hbWUiOiJTYW0gayBtdWNob2tpICIsImVtYWlsIjoic2Fta0BnbWFpbC5jb20iLCJyb2xlcyI6InVzZXIiLCJlbWFpbFNlbnQiOjAsImlzUmVzZXQiOjAsImlhdCI6MTY4NDMyNTgyNywiZXhwIjoxNjg0NDk4NjI3fQ.lv-swlWm_VkZSK68eSUkBdjKHdis7qFLu3uNI0Xgh3s
+
+
 
 
 #####
@@ -143,12 +149,12 @@ Content-Type: application/json
     "pimage": "link",
     "price": 90,
     "pcount":5
+  
 }
 
 ###
 
-GET http://localhost:4000/orders/67277ed1-6829-470b-9ffc-46bd40b7da44
-
+GET http://localhost:4000/orders/253eb490-4687-47cb-98a8-fb3fbbf1032
 ###
 DELETE http://localhost:4000/orders/1422
 
@@ -160,11 +166,24 @@ GET http://localhost:4000/orders
 ###
 PUT http://localhost:4000/orders/67277ed1-6829-470b-9ffc-46bd40b7da44
 Content-Type: application/json
-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkYjg3N2UyLTI2ODUtNGUxNy1hOGZhLTcwNzNkMjU1MGQ0MyIsInVzZXJOYW1lIjoiQURNSU4iLCJmdWxsTmFtZSI6IkVzdGhlciBNdWNob2tpICIsImVtYWlsIjoiYWRtaW4yMDIzQGdtYWlsLmNvbSIsInJvbGVzIjoiYWRtaW4iLCJlbWFpbFNlbnQiOjAsImlhdCI6MTY4NDE1NDM2MiwiZXhwIjoxNjg0MzI3MTYyfQ.r6n5TVf0nniaJgX7plnFDFSduhW51My_75jFyR-IfG4 
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkYjg3N2UyLTI2ODUtNGUxNy1hOGZhLTcwNzNkMjU1MGQ0MyIsInVzZXJOYW1lIjoiQURNSU4iLCJmdWxsTmFtZSI6IkVzdGhlciBNdWNob2tpICIsImVtYWlsIjoiYWRtaW4yMDIzQGdtYWlsLmNvbSIsInJvbGVzIjoiYWRtaW4iLCJlbWFpbFNlbnQiOjEsImlzUmVzZXQiOjAsImlhdCI6MTY4NDMyNTI1NywiZXhwIjoxNjg0NDk4MDU3fQ.SKXodM_iaoWUQtwCjCXSFPstQVsHS3VNttFDY2ZtrJw
 
 {   
       "pid": "253eb490-4687-47cb-98a8-fb3fbbf1032",
     "pname": "Grapeeees",
     "price": 210,
-    "pcount": 15
+    "pcount": 15,
+      "status":"delivered"
 }
+
+###
+
+PUT http://localhost:4000/reset/email
+Content-Type: application/json
+
+{
+    "email":"muchokiesther8@gmail.com",
+    "password":"123Wamuuuu56@"
+}
+
+
