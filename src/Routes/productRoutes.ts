@@ -9,8 +9,8 @@ const productRoutes = Router()
 // url routes
 productRoutes.post('', verifyToken ,addProduct)
 productRoutes.get('',getallProducts)
-productRoutes.get('/:id',getProduct)
-productRoutes.delete('/:id',deleteProduct)
-productRoutes.put('/:id', UpdateProduct)
+productRoutes.get('/:pid',getProduct)
+productRoutes.delete('/:pid',verifyToken ,deleteProduct)
+productRoutes.put('/:pid',verifyToken, UpdateProduct)
 
 export default productRoutes

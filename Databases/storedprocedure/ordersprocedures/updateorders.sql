@@ -4,4 +4,4 @@ BEGIN
 	UPDATE Orders SET PNAME=@pname, PRICE=@price, PCOUNT=@pcount WHERE ORDERID=@orderid AND PID=@pid
 END
 
-EXEC updateOrder @orderid='1422', @pid='8989', @pname='earings', @price=150, @pcount=10
+EXEC updateOrder @orderid='1422', @pid='8989', @pname='earings', @price=150, @pcount=10,@orderStatus='delievered'
