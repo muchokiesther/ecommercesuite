@@ -7,7 +7,7 @@ Content-Type: application/json
 {
     "userName":"Njamba",
     "fullName":"Sam k muchoki ",
-    "email":"samk@gmail.com",
+    "email":"gggk55@gmail.com",
     "phoneNumber":"0788912323",
     "password":"Wamuyu@2023"
 }
@@ -65,10 +65,10 @@ token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkYjg3N2UyLTI2ODUtNGUxNy1hO
 
 
 {
-    "pname":"Grapeeees",
-    "pdescription": "straight from the farm",
+    "pname":"clown",
+    "pdescription": "Self care ackage on discount",
     "pimage": "link",
-    "price": 230
+    "price": 2000
 }
 
 #####
@@ -78,18 +78,15 @@ GET http://localhost:4000/products
 
 #####
 /// get each product
-GET http://localhost:4000/products/29b1c4c0-5849-4d00-84d0-7b85f1b89452
-
-
+GET http://localhost:4000/products/852d7eea-2f97-4760-84cf-1b84ba206449
 #####
 /// update product
-PUT http://localhost:4000/products/f06918c3-59af-447a-b730-1f284a8f52e6
-Content-Type: application/json
-Content-type:application/json
-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkYjg3N2UyLTI2ODUtNGUxNy1hOGZhLTcwNzNkMjU1MGQ0MyIsInVzZXJOYW1lIjoiQURNSU4iLCJmdWxsTmFtZSI6IkVzdGhlciBNdWNob2tpICIsImVtYWlsIjoiYWRtaW4yMDIzQGdtYWlsLmNvbSIsInJvbGVzIjoiYWRtaW4iLCJlbWFpbFNlbnQiOjEsImlzUmVzZXQiOjAsImlhdCI6MTY4NDMyNzU2NywiZXhwIjoxNjg0NTAwMzY3fQ.EkTj1LUcbqwfdVvLfu0UlsGU6od95tHadZP7RNwnfyY
+PUT http://localhost:4000/products/d40cbb8c-f740-4a60-81f3-7fbd0d60cd9c
+Content-Type:application/json
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkYjg3N2UyLTI2ODUtNGUxNy1hOGZhLTcwNzNkMjU1MGQ0MyIsInVzZXJOYW1lIjoiQURNSU4iLCJmdWxsTmFtZSI6IkVzdGhlciBNdWNob2tpICIsImVtYWlsIjoiYWRtaW4yMDIzQGdtYWlsLmNvbSIsInJvbGVzIjoiYWRtaW4iLCJlbWFpbFNlbnQiOjEsImlzUmVzZXQiOjAsImlhdCI6MTY4NDM1OTI3OCwiZXhwIjoxNjg0NTMyMDc4fQ.URC4KNMHKEodhYyRV0z1qm_ghn4-KRuzxNElDHm_jfM
 
 {
-    "pname": "Fish and Omena",
+    "pname": "Grape",
     "pdescription": "straight from the fisher's hook",
     "pimage": "link",
     "price": 70
@@ -98,16 +95,16 @@ token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkYjg3N2UyLTI2ODUtNGUxNy1hO
 
 #####
 /// delete product
-DELETE http://localhost:4000/products/6eed4d6a-bd21-4777-988d-64e977248642
-Content-type:application/json
-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQ1MTdkODFjLWY5M2UtNDc1NS1hY2Y4LWU0NWQ1MGYxMTAzYiIsInVzZXJOYW1lIjoiTmphbWJhIiwiZnVsbE5hbWUiOiJTYW0gayBtdWNob2tpICIsImVtYWlsIjoic2Fta0BnbWFpbC5jb20iLCJyb2xlcyI6InVzZXIiLCJlbWFpbFNlbnQiOjAsImlzUmVzZXQiOjAsImlhdCI6MTY4NDMyNTgyNywiZXhwIjoxNjg0NDk4NjI3fQ.lv-swlWm_VkZSK68eSUkBdjKHdis7qFLu3uNI0Xgh3s
+DELETE http://localhost:4000/products/852d7eea-2f97-4760-84cf-1b84ba206449
+Content-Type:application/json
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkYjg3N2UyLTI2ODUtNGUxNy1hOGZhLTcwNzNkMjU1MGQ0MyIsInVzZXJOYW1lIjoiQURNSU4iLCJmdWxsTmFtZSI6IkVzdGhlciBNdWNob2tpICIsImVtYWlsIjoiYWRtaW4yMDIzQGdtYWlsLmNvbSIsInJvbGVzIjoiYWRtaW4iLCJlbWFpbFNlbnQiOjEsImlzUmVzZXQiOjAsImlhdCI6MTY4NDM1OTI3OCwiZXhwIjoxNjg0NTMyMDc4fQ.URC4KNMHKEodhYyRV0z1qm_ghn4-KRuzxNElDHm_jfM
 
 
 
 
 #####
 // add to cart
-POST http://localhost:4000/cart/155
+POST http://localhost:4000/cart/125
 Content-Type: application/json
 
 
@@ -145,12 +142,13 @@ DELETE http://localhost:4000/cart/55
 POST http://localhost:4000/orders
 Content-Type: application/json
 
-{   "pid":"253eb490-4687-4g7cb-98a8-fb3fbbf1032",
-    "pname": "Grapeeees",
+{   
+    "pname": "Graps",
     "pdescription": "straight from the farm",
     "pimage": "link",
     "price": 90,
-    "pcount":5
+    "pcount":5,
+     "orderStatus":"deleivered"
    
     
   
@@ -158,7 +156,7 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:4000/orders/67277ed1-6829-470b-9ffc-46bd40b7da44
+GET http://localhost:4000/orders/f290e2e7-32a6-4678-91ea-651b607106f1
 
 
 ###
@@ -170,16 +168,16 @@ DELETE http://localhost:4000/orders/75456aab-443b-42b1-bd39-7b1832646627
 GET http://localhost:4000/orders
 
 ###
-PUT http://localhost:4000/orders/67277ed1-6829-470b-9ffc-46bd40b7da44
+PUT http://localhost:4000/orders/f290e2e7-32a6-4678-91ea-651b607106f1
 Content-Type: application/json
 token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkYjg3N2UyLTI2ODUtNGUxNy1hOGZhLTcwNzNkMjU1MGQ0MyIsInVzZXJOYW1lIjoiQURNSU4iLCJmdWxsTmFtZSI6IkVzdGhlciBNdWNob2tpICIsImVtYWlsIjoiYWRtaW4yMDIzQGdtYWlsLmNvbSIsInJvbGVzIjoiYWRtaW4iLCJlbWFpbFNlbnQiOjEsImlzUmVzZXQiOjAsImlhdCI6MTY4NDMyNTI1NywiZXhwIjoxNjg0NDk4MDU3fQ.SKXodM_iaoWUQtwCjCXSFPstQVsHS3VNttFDY2ZtrJw
 
 {   
-      "pid": "253eb490-4687-47cb-98a8-fb3fbbf1032",
+      "pid": "3856a7bd-f974-4625-b43d-6b448a78a62e",
     "pname": "frions",
     "price": 210,
     "pcount": 150,
-    "status":"deleivered"
+    "orderStatus":"deleivered"
 }
 
 ###
@@ -188,7 +186,7 @@ PUT http://localhost:4000/reset/email
 Content-Type: application/json
 
 {
-    "email":"muchokiesther8@gmail.com",
+    "email":"muchok8@gmail.com",
     "password":"123Wamuuuu56@"
 }
 

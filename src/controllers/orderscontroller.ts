@@ -115,9 +115,9 @@ export const getOrderById:RequestHandler=async(req,res)=>{
              return res.status(404).json({message:"order not exists"})
         }
 
-        const {pid,pname, price, pcount} = req.body
+        const {pid,pname, price, pcount,orderStatus} = req.body
         if (req.info?.roles ==='admin'){
-            await ControllerHelpers.exec('updateOrder',{orderid,pid,pname,price,pcount})
+            await ControllerHelpers.exec('updateOrder',{orderid,pid,pname,price,pcount,orderStatus})
         // .execute('updateOrder')
 
         return res.status(200).json({message:"Order update successfully"})

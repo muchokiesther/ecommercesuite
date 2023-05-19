@@ -9,6 +9,7 @@ import { User,UserInfo,ExtendedRequest } from "../Interfaces";
 import {ControllerHelpers} from  '../DatabaseHelpers';
 import { Console, error, log } from "console";
 
+
 // interface ExtendedRequest extends Request {
 //     body: {
 //       userName: string;
@@ -207,7 +208,7 @@ export const getUsersByEmail:RequestHandler<{email:string}>=async(req,res)=>{
       const { email,password } = req.body;
       const {error} =  resetSchema.validate(req.body)
       if(error){
-        return res.status(404).json(error.details[0].message)
+        return res.status(400).json(error.details[0].message)
       }
      
     //  const pool = await mssql.connect(sqlConfig);

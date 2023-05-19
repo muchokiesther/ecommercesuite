@@ -107,7 +107,7 @@ export const UpdateProduct =  async(req:productsExtendedRequest, res:Response) =
 
     try {
         const {pid} = req.params
-        // const pool = await mssql.connect(sqlConfig)
+       //  const pool = await mssql.connect(sqlConfig)
         
         let product:iProducts[] = await(await ControllerHelpers.exec ('getproductByid',{pid})).recordset
         if(!product.length){
@@ -115,10 +115,10 @@ export const UpdateProduct =  async(req:productsExtendedRequest, res:Response) =
         }
         const {pname, pdescription, pimage, price} = req.body
         if ( req.info && req.info?.roles === 'admin') {
-        await ControllerHelpers.exec('updateProduct',{pid,pname,pdescription,pimage,price})
+      await ControllerHelpers.exec('updateProduct',{pid,pname,pdescription,pimage,price})
 
         // await pool.request()
-        // .input('pid',id)
+        // .input('pid',pid)
         // .input('pname', pname)
         // .input('pdescription', pdescription)
         // .input('pimage', pimage)
