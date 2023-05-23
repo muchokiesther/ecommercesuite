@@ -6,7 +6,7 @@ import { verifyToken } from "../Middlewars/creationtaken";
 const orderRoutes = Router()
 orderRoutes.post('', createOrder)
 orderRoutes.get('',getAllOrders)
-orderRoutes.get('/:id',getOrderById)
+orderRoutes.get('/:orderid',getOrderById)
 orderRoutes.delete('/:id',deleteOrder)
 orderRoutes.put('/:orderid',verifyToken, UpdateOrders)
 export default orderRoutes

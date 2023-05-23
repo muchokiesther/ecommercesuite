@@ -1,12 +1,16 @@
-import {Request} from 'express'
 
-export interface DecodedData {
+import {Request} from 'express'  
+
+  
+
+ export  interface DecodedData {
     id: string
     userName: string
     fullName: string
     email: string
     phoneNumber: number
     roles: string
+
 }
 
 export interface User{
@@ -30,7 +34,9 @@ export interface UserExtendedRequest extends Request{
     }
 }
 
-export interface iProducts {
+
+  export  interface iProducts {
+
     PID:string
     PNAME:string
     PDESCRIPTION:string
@@ -38,8 +44,12 @@ export interface iProducts {
     PRICE:number
     ISDELETED: number
 }
-export interface ProductExtendedRequest extends Request {
+
+
+export  interface productsExtendedRequest extends Request {
     body: {
+       
+
         pname:string
         pdescription:string
         pimage:string
@@ -50,7 +60,8 @@ export interface ProductExtendedRequest extends Request {
         id: string;
         pid: string;
     }
-}
+  }
+
 
 export interface iorders {
     ORDERID:string
@@ -59,13 +70,18 @@ export interface iorders {
     PCOUNT:string
     PRICE:number
     ISDELETED: number
+
 }
-export interface OrderExtendedRequest extends Request {
+
+
+export interface ordersExtendedRequest extends Request {
+
     body: {
         pid:string
         pname:string
         price:number
         pcount:number
+        orderStatus:string
 
     }
     info?: DecodedData
@@ -73,34 +89,31 @@ export interface OrderExtendedRequest extends Request {
         id: string;
         pid:string;
         orderid:string
+
     }
 }
 
 
-export interface iCart {
+
+
+  //from cart controllers
+ export interface iCart {
     PID:string
+    CARTID:string
     PNAME:string
     PDESCRIPTION:string
     PRICE:number
     PCOUNT:number
 }
 
-export interface CartExtendedRequest extends Request {
+
+export interface cartExtendedRequest extends Request {
     body: {
+        cartid:string
         pname:string
         pdescription:string
         price:number
     }
+
 }
-
-
-
-
-
-  
-
-    
-   
-  
-
 

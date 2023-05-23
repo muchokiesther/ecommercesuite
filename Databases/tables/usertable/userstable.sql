@@ -10,7 +10,10 @@
  email VARCHAR(155) UNIQUE,
  phoneNumber INT,
  password VARCHAR (200),
- isDeleted INT DEFAULT 0
+ isDeleted INT DEFAULT 0,
+ roles VARCHAR(10) DEFAULT 'user',
+ isReset INT NOT NULL DEFAULT 0
+
  )
 
 

@@ -1,31 +1,18 @@
 import {Response,RequestHandler,Request} from 'express'
-import mssql from 'mssql'
 import {v4 as uid} from 'uuid'
-import {sqlConfig} from '../config'
-import {ControllerHelpers} from '../DatabaseHelpers/index'
-import {iProducts,ProductExtendedRequest} from '../Interfaces/index'
-
+import { iProducts,productsExtendedRequest } from '../Interfaces'
+import {ControllerHelpers} from  '../DatabaseHelpers';
 
 // add product
-export const addProduct = async(req:ProductExtendedRequest, res:Response) => {
+export const addProduct = async(req:productsExtendedRequest, res:Response) => {
     try {
         // console.log(req.info?.roles);
-        if ( req.info && req.info?.roles === 'admin') {
-
-            let id = uid()
-            // console.log(id);        
-            // const pool = await mssql.connect(sqlConfig)
+        if ( req.info && req.info?.roles === 'admin') {   
+      
+            let pid = uid()
             const {pname,pdescription, pimage, price} = req.body
-            // await pool.request()
-            // .input('pid',id)
-            // .input('pname',pname)
-            // .input('pdescription',pdescription)
-            // .input('pimage',pimage)
-            // .input('price',price)
-            // .execute('addProduct')
-
-            await ControllerHelpers.exec('addProduct',{pid:id,pname,pdescription,pimage,price})
-
+            
+            await ControllerHelpers.exec('addProduct',{pid,pname,pdescription,pimage,price})
             return res.status(201).json({message:"product added successfully"})
 
         }
@@ -39,15 +26,10 @@ export const addProduct = async(req:ProductExtendedRequest, res:Response) => {
 }
 
 // get each product
-export const getProduct:RequestHandler<{id:string}> = async(req,res) => {
+export const getProduct:RequestHandler = async(req,res) => {
     try {
-        const {id} = req.params
-        // const pool = await mssql.connect(sqlConfig)
-        // console.log(productId)
-        // let product:iProducts = (await (pool.request())
-        // .input('pid',id)
-        // .execute('getproductByid')).recordset[0]
-        let product:iProducts[] = (await ControllerHelpers.exec('getproductByid',{pid:id})).recordset
+        const {pid} = req.params
+        let product:iProducts = await(await ControllerHelpers.exec ('getproductByid',{pid})).recordset[0]
         if(!product){
             return res.status(404).json({message:"product not exists"})
         }
@@ -61,10 +43,8 @@ export const getProduct:RequestHandler<{id:string}> = async(req,res) => {
 // get all products
 export const getallProducts = async(req:Request, res:Response) => {
     try {
-        // const pool = await mssql.connect(sqlConfig)
-        // let products:iProducts[] = (await pool.request()
-        // .execute('getAllproducts')).recordset
-        let products:iProducts[] = (await ControllerHelpers.exec('getAllproducts')).recordset
+        let products:iProducts[] = await(await ControllerHelpers
+        .exec('getAllproducts')).recordset
         return res.status(200).json(products)
     } catch (error:any) {
         return res.status(500).json(error.message)
@@ -72,33 +52,23 @@ export const getallProducts = async(req:Request, res:Response) => {
 }
 
 
-export const UpdateProduct = async(req:ProductExtendedRequest, res:Response) => {
+export const UpdateProduct =  async(req:productsExtendedRequest, res:Response) => {
+
     try {
-        const {id} = req.params
-        // const pool = await mssql.connect(sqlConfig)
-        // let product:iProducts[] = (await pool.request()
-        // .input('pid',id)
-        // .execute('getproductByid')).recordset
-        let product:iProducts[] = (await ControllerHelpers.exec('getproductByid',{pid:id})).recordset
+        const {pid} = req.params
+       //  const pool = await mssql.connect(sqlConfig)
+        
+        let product:iProducts[] = await(await ControllerHelpers.exec ('getproductByid',{pid})).recordset
         if(!product.length){
             return res.status(404).json({message:"product not exists"})
         }
-        
+        const {pname, pdescription, pimage, price} = req.body
         if ( req.info && req.info?.roles === 'admin') {
-            // await pool.request()
-            // .input('pid',id)
-            // .input('pname', pname)
-            // .input('pdescription', pdescription)
-            // .input('pimage', pimage)
-            // .input('price', price)
-            // .execute('updateProduct')
-            const {pname, pdescription, pimage, price} = req.body
-            await ControllerHelpers.exec('updateProduct',{pid:id, pname,pdescription,pimage,price})
-            return res.status(200).json({message:"product update successfully"})
-        }
-        else {
-            return res.status(403).json({message:"only admin can update"})
-        }       
+            await ControllerHelpers.exec('updateProduct',{pid,pname,pdescription,pimage,price})
+            return res.status(200).json({message:"product updated successfully"})
+    }else{
+        return res.status(403).json({ message: 'Access denied' });
+    }
 
     } catch (error:any) {
         return res.status(500).json(error.message)
@@ -106,26 +76,27 @@ export const UpdateProduct = async(req:ProductExtendedRequest, res:Response) => 
 }
 
 
-export const deleteProduct = async(req:ProductExtendedRequest, res:Response) => {
+export const deleteProduct = async(req:productsExtendedRequest, res:Response) => {
 
     try {
        
-        // const pool = await mssql.connect(sqlConfig)
-        const {id} = req.params
-        // let product:iProducts[] = (await pool.request()
-        // .input('pid',id)
-        // .execute('getproductByid')).recordset
-        let product:iProducts[] = (await ControllerHelpers.exec('getproductByid',{pid:id})).recordset
+        const {pid} = req.params
+        let product:iProducts[] =  await(await ControllerHelpers.exec ('getproductByid',{pid})).recordset
+
         if(!product.length){
             return res.status(404).json({message:"product not exists"})
         }
 
-        if (req.info?.roles == 'admin') {
-            // await pool.request()
-            // .input('pid',id)
-            // .execute('deleteProduct')
-            await ControllerHelpers.exec('deleteProduct',{pid:id})
-            return res.status(200).json({message:"product deleted successfully"})
+        if ( req.info && req.info?.roles === 'admin') {
+
+        
+            await(await ControllerHelpers.exec ('deleteProduct',{pid})).recordset
+
+        // await pool.request()
+        // .input('pid',id)
+        // .execute('deleteProduct')
+
+        return res.status(200).json({message:"product deleted successfully"})
         }else{
             return res.status(403).json({ message: 'Access denied' });
         }
