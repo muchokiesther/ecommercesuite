@@ -5,9 +5,9 @@ Content-Type: application/json
 
 
 {
-    "userName":"wamuyu",
+    "userName":"wamuyuu",
     "fullName":"Sam k muchoki ",
-    "email":"mimi@gmail.com",
+    "email":"kiambii@gmail.com",
     "phoneNumber":"0788912323",
     "password":"Wamuyu@2023"
 }
@@ -19,8 +19,7 @@ GET   http://localhost:4000/users
 
 ###
 //getting user by email
-GET http://localhost:4000/users/email/kariuki@gmail.com
-
+GET http://localhost:4000/users/email/kiambii@gmail.com
 
 
 ###
@@ -49,8 +48,8 @@ POST http://localhost:4000/users/login
 Content-Type:   application/json
 
 {
-    "password":"Wamuyu@23",
-    "email":"kath@gmail.com"
+    "password":"Wamuyu@2023",
+    "email":"kiambii@gmail.com"
       
 }
 

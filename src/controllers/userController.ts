@@ -190,14 +190,14 @@ export const getUsersByEmail:RequestHandler<{email:string}>=async(req,res)=>{
             }
             const payload = user.map(usr => {
               const { password, isDeleted, phoneNumber, ...rest } = usr;
-              return { ...rest, roles: 'user' }; // Added the roles fiels
+              return  rest; // Added the roles fiels
             });
             
             // tokening
             console.log();
             
             const token = jwt.sign(payload[0], <string>process.env.SECRET_KEY, {expiresIn:'172800s'})
-            return res.json({message:"login successfull!!", token})
+            return res.json({message:"login successfull!!", token,roles:payload[0].roles})
         } catch (error:any) {
             return res.status(500).json({message:error.message})
         }
