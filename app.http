@@ -5,9 +5,9 @@ Content-Type: application/json
 
 
 {
-    "userName":"Njamba",
+    "userName":"wamuyu",
     "fullName":"Sam k muchoki ",
-    "email":"gggk55@gmail.com",
+    "email":"mimi@gmail.com",
     "phoneNumber":"0788912323",
     "password":"Wamuyu@2023"
 }
@@ -45,12 +45,12 @@ DELETE http://localhost:4000/users/147baaa3-803c-4b36-84ab-6cf4aa12c637
 
 
 ###
-POST http://localhost:4000/users/login/
+POST http://localhost:4000/users/login
 Content-Type:   application/json
 
 {
-    "password":"Admin@2023",
-    "email":"Admin2023@gmail.com"
+    "password":"Wamuyu@23",
+    "email":"kath@gmail.com"
       
 }
 
@@ -123,6 +123,7 @@ GET http://localhost:4000/cart
 
 #####
 // update cart
+//change the pid to be user email
 PUT http://localhost:4000/cart/125
 Content-Type: application/json
 
@@ -179,6 +180,10 @@ token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkYjg3N2UyLTI2ODUtNGUxNy1hO
     "pcount": 150,
     "orderStatus":"deleivered"
 }
+
+
+###
+PATCH  https://localhost:8000/reset/forgotPassword?email=mucho.ijones@gmail.com
 
 ###
 
