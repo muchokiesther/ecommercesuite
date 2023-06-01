@@ -8,7 +8,7 @@ import jwt from 'jsonwebtoken'
 import { User,UserInfo,ExtendedRequest } from "../Interfaces";
 import {ControllerHelpers} from  '../DatabaseHelpers';
 import { Console, error, log } from "console";
-
+import ejs from 'ejs'
 
 // interface ExtendedRequest extends Request {
 //     body: {
@@ -70,11 +70,11 @@ export const addUser=async (req:Request, res:Response)=>{
         //      .input ('password', mssql.VarChar , hashedPassword)
         // .execute('adduser')
 
-        return res.status(500).json( {message:"User Registered!!"} )
+        return res.status(201).json( {message:"User Registered!!"} )
 
 
     }catch(error:any){
-        return res.status(500).json(error.message)
+        return res.status(500).json({message:error.message})
     }
 }
 
@@ -189,18 +189,69 @@ export const getUsersByEmail:RequestHandler<{email:string}>=async(req,res)=>{
                 return res.status(404).json({message:"user not found"})
             }
             const payload = user.map(usr => {
-                const {password,isDeleted,phoneNumber,...rest} = usr
-                return rest
-            })
+              const { password, isDeleted, phoneNumber, ...rest } = usr;
+              return  rest; // Added the roles fiels
+            });
+            
             // tokening
             console.log();
             
             const token = jwt.sign(payload[0], <string>process.env.SECRET_KEY, {expiresIn:'172800s'})
-            return res.json({message:"login successfull!!", token})
+            return res.json({message:"login successfull!!", token,roles:payload[0].roles})
         } catch (error:any) {
-            return res.status(500).json(error.message)
+            return res.status(500).json({message:error.message})
         }
    }
+
+
+  //forgot password
+  export const forgotPassword = async (req: ExtendedRequest, res: Response) => {
+    try {
+      let link = ''
+      const { email } = req.query as {email:string}
+      const pool = await mssql.connect(sqlConfig);
+      let user: User[] = (await (await pool.request()).input("email", email).execute("getUserByEmail")).recordset;
+      console.log(user);
+  
+      if (!user[0]) {
+        return res.status(404).json({ message: "User was not found" });
+      }
+  
+       
+      // for (let userRecord of user) {
+      //   ejs.renderFile('dist/Templates/welcome.ejs', { name: userRecord.fullName }, async (err, html) => {
+      //     if (err) {
+      //       console.error("Error rendering email template:", err);
+      //       return;
+      //     }
+      //     try {
+      //       let messageOptions = {
+      //         from: "muchokiesther8gmail.com",
+      //         to: userRecord.email,
+      //         subject: "Welcome Email",
+      //         html
+      //       }
+      //       await sendMail(messageOptions);
+      //       await pool.request().query(`UPDATE users SET emailSent=1 WHERE id='${userRecord.id}'`);
+      //     } catch (error) {
+      //       console.error("Error sending email:", error);
+      //     }
+      //   }
+      //   );
+      // }
+
+      //const token = jwt.sign(payload[0], <string>process.env.SECRET_KEY, {expiresIn:'1h'})
+ 
+      await pool.request().query(`UPDATE users SET emailSent=1 WHERE id='${user[0].id}'`);
+  
+      return res.status(200).json({ message: "Email sent successfully" });
+    } catch (error) {
+      console.error("Error sending email:", error);
+      return res.status(500).json({ message: "Failed to send email" });
+    }
+  };
+
+
 //reset users
 
    export const resetPassword = async (req: ExtendedRequest, res: Response) => {

@@ -8,8 +8,8 @@ export const regSchema =  joi.object({
     fullName:joi.string().required().min(4),
     email:joi.string().email().required(),
     phoneNumber:joi.number().required(),
-    password:joi.string().pattern((new  RegExp(`^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).{8,}$`))),
-    role:joi.string()
+    password:joi.string().pattern((new  RegExp(`^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).{8,}$`)))
+   
 
 })
 export const resetSchema =  joi.object({
