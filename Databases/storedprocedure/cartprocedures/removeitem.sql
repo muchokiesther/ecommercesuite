@@ -1,6 +1,6 @@
 CREATE OR ALTER PROCEDURE removeItemfromCart(@pid VARCHAR(200))
 AS 
 BEGIN
-UPDATE CartLists SET PCOUNT=PCOUNT-1 WHERE PID=@pid 
+	DELETE  FROM Cartbasket WHERE PID=@pid
 END
-EXEC removeItemfromCart '23423'
+EXEC removeItemfromCart '2329'

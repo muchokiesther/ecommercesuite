@@ -4,9 +4,9 @@ import {Request} from 'express'
   
 
  export  interface DecodedData {
-    id: string
-    userName: string
-    fullName: string
+    userid: string
+    username: string
+    fullname: string
     email: string
     phoneNumber: number
     roles: string
@@ -22,6 +22,7 @@ export interface User{
     password:string
     roles:string
     isDeleted:number
+    emailSent:number
 }
 
 export interface UserExtendedRequest extends Request{
@@ -30,7 +31,8 @@ export interface UserExtendedRequest extends Request{
         fullName:string
         email:string
         phoneNumber:number
-        password:string    
+        password:string   
+        urole:string 
     }
 }
 
@@ -41,6 +43,7 @@ export interface UserExtendedRequest extends Request{
     PNAME:string
     PDESCRIPTION:string
     PIMAGE:string
+    PQUANTITY:number
     PRICE:number
     ISDELETED: number
 }
@@ -117,3 +120,6 @@ export interface cartExtendedRequest extends Request {
 
 }
 
+export interface ExtendedRequest extends Request {
+    info?:DecodedData
+}

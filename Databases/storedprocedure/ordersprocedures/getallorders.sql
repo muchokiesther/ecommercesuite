@@ -1,7 +1,0 @@
-CREATE OR ALTER PROCEDURE getallorders
-AS
-BEGIN
-	SELECT * FROM Orders WHERE ISDELETED=0
-END
-
-EXEC getallorders

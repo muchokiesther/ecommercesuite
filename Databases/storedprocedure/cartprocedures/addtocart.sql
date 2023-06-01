@@ -1,10 +1,24 @@
-CREATE OR ALTER PROCEDURE addtoCart(
+CREATE OR ALTER PROCEDURE addtoCart
+	@cid VARCHAR(200),
 	@pid VARCHAR(200),
-	@pname VARCHAR(155),
-	@pdescription VARCHAR(155),
-	@price INT ) 
+	@email VARCHAR(150)
 AS
 BEGIN
-INSERT INTO CartLists(PID ,PNAME, PDESCRIPTION, PRICE) VALUES(@pid, @pname, @pdescription, @price)
+	DECLARE @uid VARCHAR(200)
+	DECLARE @pname VARCHAR(155)
+	DECLARE @pdescription VARCHAR(155)
+	DECLARE @price INT
+
+	SELECT @uid=USERID FROM Users WHERE EMAIL=@email
+
+	SELECT @pname=PNAME, @pdescription=PDESCRIPTION, @price=PRICE
+	FROM Products
+	WHERE PID=@pid
+
+	INSERT INTO Cartbasket(CID,PID,UID,PNAME,PDESCRIPTION,PRICE) 
+	VALUES (@cid, @pid, @uid, @pname, @pdescription, @price)	
 END
-EXEC addtoCart @pid='23423', @pname='Chindano', @pdescription='nda thagereirie', @price=75 
+SELECT * FROM Users
+SELECT * FROM Products
+SELECT * FROM Cartbasket
+EXEC addtoCart @cid='st3012', @pid='2329', @email='johnny@bravo.com'

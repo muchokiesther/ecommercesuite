@@ -6,21 +6,7 @@ import { iCart, cartExtendedRequest } from '../Interfaces'
 import { ControllerHelpers } from '../DatabaseHelpers'
 
 
-interface iCart {
-    PID:string
-    PNAME:string
-    PDESCRIPTION:string
-    PRICE:number
-    PCOUNT:number
-}
 
-interface ExtendedRequest extends Request {
-    body: {
-        pname:string
-        pdescription:string
-        price:number
-    }
-}
 
 
 export const addItemtoCart = async (req: cartExtendedRequest, res: Response) => {

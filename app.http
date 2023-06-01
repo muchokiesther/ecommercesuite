@@ -1,5 +1,6 @@
 
-###
+#####
+// registering a user
 POST   http://localhost:4000/users
 Content-Type: application/json
 
@@ -13,23 +14,25 @@ Content-Type: application/json
 }
 
 
-###
+#####
+// returns all users data
 GET   http://localhost:4000/users
 
 
 ###
 //getting user by email
-GET http://localhost:4000/users/email/kariuki@gmail.com
+GET http://localhost:4000/users/email/johnny@bravo.com
 
 
 
-###
-GET   http://localhost:4000/users/20655c92-23c7-4a0b-9089-005444745331
+######
+//get user by id
+GET   http://localhost:4000/users/1
 
 
-###
-
-PUT  http://localhost:4000/users/0587154f-8765-4b17-9a85-514f4bd87c03
+#####
+// update user dtails
+PUT  http://localhost:4000/users/1
 Content-Type: application/json
 
 {
@@ -37,21 +40,35 @@ Content-Type: application/json
     "fullName":"George88 ",
     "email":"ggk8@gmail.com",
     "phoneNumber":"0712123556",
+    "password":"12456789",
+    "urole": "admin"
+}
+
+#####
+// delete user details
+DELETE http://localhost:4000/users/147baaa3-803c-4b36-4aa12c637
+
+
+######
+// login user
+POST http://localhost:4000/users/login/
+Content-Type: application/json
+
+{
+    
+    "email":"ggk8@gmail.com",
     "password":"12456789"
 }
 
-###
-DELETE http://localhost:4000/users/147baaa3-803c-4b36-84ab-6cf4aa12c637
+####
+// reset password
+PUT http://localhost:4000/reset/1
+Content-Type: application/json
 
-
-###
-POST http://localhost:4000/users/login/
-Content-Type:   application/json
 
 {
-    "password":"Admin@2023",
-    "email":"Admin2023@gmail.com"
-      
+    "email":"ggk8@gmail.com",
+    "password":"124567890"
 }
 
 
@@ -190,4 +207,5 @@ Content-Type: application/json
     "password":"123Wamuuuu56@"
 }
 
+GET http://localhost:4000/reset/email
 

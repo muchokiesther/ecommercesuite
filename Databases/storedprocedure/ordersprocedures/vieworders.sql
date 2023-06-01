@@ -1,8 +1,0 @@
-CREATE OR ALTER PROCEDURE viewOrders(@orderid VARCHAR(200))
-AS
-BEGIN
-
-	SELECT * FROM Orders WHERE ORDERID = @orderid AND ISDELETED=0
-END
-
-exec viewOrders '1422'

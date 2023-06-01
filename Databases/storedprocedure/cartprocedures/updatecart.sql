@@ -1,12 +1,9 @@
-CREATE OR ALTER PROCEDURE updateItemCart(
-    @pid VARCHAR(200),
-    @pname VARCHAR(155), 
-    @pdescription VARCHAR(155), 
-    @price INT)
+CREATE OR ALTER PROCEDURE updateItemCartUser(
+    @cid VARCHAR(200), @pid VARCHAR(200), @pcount INT)
 AS 
 BEGIN
-UPDATE CartLists SET PNAME=@pname, PDESCRIPTION=@pdescription, PRICE=@price, PCOUNT=PCOUNT+1 WHERE PID=@pid
+UPDATE Cartbasket SET PCOUNT=@pcount WHERE @pcount<= (SELECT PQUANTITY FROM Products WHERE PID=@pid) AND CID=@cid
+
 END
-EXEC updateItemCart @pid='23423', @pname='Chindano', @pdescription='nda thagereirie', @price=75 
 
-
+EXEC updateItemCartUser @cid='st3012', @pid='2329', @pcount=56
