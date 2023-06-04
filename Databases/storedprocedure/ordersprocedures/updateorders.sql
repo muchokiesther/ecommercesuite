@@ -1,7 +1,7 @@
-CREATE OR ALTER PROCEDURE updateOrder(@orderid VARCHAR(200), @pid VARCHAR(200), @pname VARCHAR(155), @price INT, @pcount INT)
+CREATE OR ALTER PROCEDURE updateOrder(@orderid VARCHAR(200), @orderstatus VARCHAR(155))
 AS
 BEGIN
-	UPDATE Orders SET PNAME=@pname, PRICE=@price, PCOUNT=@pcount WHERE ORDERID=@orderid AND PID=@pid
+	UPDATE Orders SET ORDERSTATUS=@orderstatus WHERE ORDERID=@orderid AND ISDELETED=0
 END
 
 EXEC updateOrder @orderid='1422', @pid='8989', @pname='earings', @price=150, @pcount=10,@orderStatus='delievered'

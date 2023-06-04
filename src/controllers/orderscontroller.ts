@@ -3,16 +3,16 @@ import mssql from 'mssql'
 import {v4 as uid} from 'uuid'
 import {sqlConfig} from '../config'
 import {ControllerHelpers} from  '../DatabaseHelpers';
-import { iorders, ordersExtendedRequest, DecodedData } from '../Interfaces'
+import { iorders, OrdersExtendedRequest, DecodedData } from '../Interfaces'
 
 
-export const createOrder = async(req:ordersExtendedRequest , res:Response) => {
+export const createOrder = async(req:OrdersExtendedRequest , res:Response) => {
     try {
-        let id = uid()
-        
+        let orid = uid()
+        const {cid} = req.body       
         //const pool = await mssql.connect(sqlConfig)
-        const {pid,pname,price,pcount} = req.body
-        await ControllerHelpers.exec('createOrder',{orderid:id,pid,pname,price,pcount})
+
+        await ControllerHelpers.exec('createOrder',{orid, cid})
         return res.status(201).json({message:"Order created successfully"})
         
     } catch (error:any) {
@@ -21,11 +21,10 @@ export const createOrder = async(req:ordersExtendedRequest , res:Response) => {
     }
 }
 
-export const getOrderById:RequestHandler=async(req,res)=>{
+export const getOrderById=async(req:OrdersExtendedRequest,res:Response)=>{
     try{
-            const{orderid:id}=req.params
-        
-           let item: iorders = await(await ControllerHelpers.exec('viewOrders', {  orderid:id })).recordset[0]
+            const{orderid}=req.params     
+           let item: iorders = await(await ControllerHelpers.exec('viewOrders', { orderid})).recordset[0]
 
        
            if(!item)
@@ -41,22 +40,19 @@ export const getOrderById:RequestHandler=async(req,res)=>{
        }
    }
 
-export const deleteOrder = async (req:Request <{id:string}> , res:Response) =>{
+export const deleteOrder = async (req:OrdersExtendedRequest, res:Response) =>{
 
     try {
     //    const pool = await mssql.connect(sqlConfig)
-        const{id} = req.params
-        let item: iorders = await(await ControllerHelpers.exec('viewOrders', {  orderid:id })).recordset[0]
+        const{orderid} = req.params
+        let item: iorders = await(await ControllerHelpers.exec('viewOrders', { orderid})).recordset[0]       
+        if(!item)
+        {
+             return res.status(404).json({message:"order not exists"})
+         }
+         
 
-        // let item:iorders =(await(await pool.request())
-        //    .input('orderid', id)
-        //    .execute('viewOrders')).recordset[0]
-           if(!item)
-           {
-                return res.status(404).json({message:"order not exists"})
-           }
-
-       await( await ControllerHelpers.exec('deleteOrder', { orderid:id }));
+        await ControllerHelpers.exec('deleteOrder', { orderid })
         return res.status(200).json({message: "order deleted Successfully"})
     } 
     catch (error:any) {
@@ -65,19 +61,21 @@ export const deleteOrder = async (req:Request <{id:string}> , res:Response) =>{
 
 }
 
-   export const UpdateOrders=async(req:ordersExtendedRequest , res:Response) => {
+   export const UpdateOrders=async(req:OrdersExtendedRequest , res:Response) => {
     try {
+        const {orderstatus} = req.body
         const {orderid} = req.params
-        let item: iorders = await(await ControllerHelpers.exec('viewOrders', {  orderid })).recordset[0]
+        let item: iorders = await(await ControllerHelpers.exec('viewOrders', {orderid})).recordset[0]
 
         if(!item)
         {
-                return res.status(404).json({message:"order not exists"})
-        }
+             return res.status(404).json({message:"order not exists"})
+         }
 
-        const {pid,pname, price, pcount,orderStatus} = req.body
-        if (req.info?.roles ==='admin'){
-            await ControllerHelpers.exec('updateOrder',{orderid,pid,pname,price,pcount,orderStatus})
+        
+        if (req.info?.UROLE ==='admin'){
+            await ControllerHelpers.exec('updateOrder',{orderid,orderstatus})
+            return res.status(200).json({message: "order updated successfully"})
         }else{
             return res.status(403).json({message:"Access denied!"})
         }
@@ -88,12 +86,12 @@ export const deleteOrder = async (req:Request <{id:string}> , res:Response) =>{
 
 export const getAllOrders = async(req:Request, res:Response) => {
     try {
-        const pool = await mssql.connect(sqlConfig)
-        let item:iorders[] = (await ControllerHelpers.exec('getallorders')).recordset
-        if(item) {
-            return res.status(200).json(item)
+        let orders:iorders[] = (await ControllerHelpers.exec('viewActiveorders')).recordset
+        
+        if(orders) {
+            return res.status(200).json(orders)
         }
-        return res.status(404).json({message:"unsuccessful"})
+        return res.status(404).json({message: "no orders found"})
         
     } catch (error:any) {
         return res.status(500).json(error.message)

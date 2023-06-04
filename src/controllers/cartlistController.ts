@@ -2,26 +2,19 @@ import {Response,RequestHandler,Request} from 'express'
 import mssql from 'mssql'
 import {v4 as uid} from 'uuid'
 import {sqlConfig} from '../config'
-import { iCart, cartExtendedRequest } from '../Interfaces'
+import { iCart, CartExtendedRequest } from '../Interfaces'
 import { ControllerHelpers } from '../DatabaseHelpers'
 
 
 
 
 
-export const addItemtoCart = async (req: cartExtendedRequest, res: Response) => {
+export const addItemtoCart = async (req:CartExtendedRequest, res: Response) => {
     try {
-        const {id} = req.params
-        const pool = await mssql.connect(sqlConfig)
-        const {pname,pdescription, price} = req.body
-        await pool.request()
-        .input('pid',id)
-        .input('pname',pname)
-        .input('pdescription',pdescription)
-        .input('price',price)
-        .execute('addtoCart')
-
-        await ControllerHelpers.exec('addtoCart',{pid:id,pname,pdescription,price})
+        const cid = uid()
+        const {pid} = req.params
+        const {email} = req.body
+        await ControllerHelpers.exec('addtoCart',{cid,pid,email})
         return res.status(201).json({message:"item added successfully"})
 
     } catch (error:any) {
@@ -32,10 +25,12 @@ export const addItemtoCart = async (req: cartExtendedRequest, res: Response) => 
 export const viewCartItems = async(req:Request, res:Response) => {
 
     try {
-        const pool = await mssql.connect(sqlConfig)
-        let item:iCart[] = (await pool.request()
-        .execute('viewCart')).recordset
-        return res.status(200).json(item)
+        let cartitems:iCart[] = (await ControllerHelpers.exec('viewCart')).recordset
+        if(cartitems.length){
+            return res.status(200).json(cartitems)
+        }
+        return res.status(404).json({message: "Could not find Cart items"})
+        
     } catch (error:any) {
         return res.status(500).json(error.message)
     }
@@ -43,19 +38,18 @@ export const viewCartItems = async(req:Request, res:Response) => {
 
 
 
-export const updateCartItems = async (req: Request<{ id: string }>, res: Response) => {
+export const updateCartItems = async (req:CartExtendedRequest, res: Response) => {
     try {
-        const {id} = req.params
+        const {cid} = req.params
         const pool = await mssql.connect(sqlConfig)
-        const {pname,pdescription, price} = req.body
-       
-        await pool.request()
-        .input('pid', id)
-        .input('pname', pname)
-        .input('pdescription', pdescription)
-        .input('price', price)
-        .execute('updateItemCart')
-        return res.status(200).json({message:"item added successfully"})
+        const {pid, pcount} = req.body
+        // check if product exist in cart
+        const exists = await pool.request().query("SELECT PID FROM Cartbasket WHERE PID='${pid}'")
+        if(exists){
+            await ControllerHelpers.exec('updateItemCartUser',{cid,pid,pcount})
+            return res.status(200).json({message:"item updated successfully"})
+        }
+        return res.status(404).json({message: "product does not exist in cart"})
     } catch (error:any) {
         return res.status(500).json(error.message)
     }
@@ -64,14 +58,18 @@ export const updateCartItems = async (req: Request<{ id: string }>, res: Respons
   
 
 // EXEC removeItemfromCart '23423'
-export const removeCartItem = async (req: Request<{ id: string }>, res: Response) => {
+export const removeCartItem = async (req:CartExtendedRequest, res: Response) => {
     try {
-        const {id} = req.params
+        const {pid} = req.params
         const pool = await mssql.connect(sqlConfig)
-        await pool.request()
-        .input('pid', id)
-        .execute('removeItemfromCart')
-        return res.status(200).json({message:"item removed from list"})
+        // check if product exist in cart
+        const exists = await pool.request().query("SELECT PID FROM Cartbasket WHERE PID='${pid}'")
+        if(exists){
+            await ControllerHelpers.exec('removeItemfromCart',{pid})
+            return res.status(200).json({message:"item removed from cart"})
+        }
+        return res.status(404).json({message: "item does not exist in the cart"})
+        
     } catch (error:any) {
         return res.status(500).json(error.message)
     }

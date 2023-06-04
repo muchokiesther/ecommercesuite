@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { addUser, getAllUsers, getUsersById, updateUser ,deleteUser, getUsersByEmail, loginUser, resetPassword } from "../controllers/userController";
+import { addUser, getAllUsers, getUsersById, updateUser ,deleteUser, getUsersByEmail } from "../controllers/userController";
 import { verifyToken } from "../Middlewars/creationtaken";
 
 
@@ -19,8 +19,6 @@ userRoutes.put('/:id',updateUser)
 
 userRoutes.delete('/:id', deleteUser)
 
-userRoutes.post('/login', loginUser)
-userRoutes.put('/reset/:id', resetPassword)
 
 
 

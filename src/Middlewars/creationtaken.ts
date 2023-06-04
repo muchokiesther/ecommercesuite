@@ -3,14 +3,16 @@ import {NextFunction,Request,Response} from 'express'
 import dotenv from 'dotenv'
 import path from 'path'
 
-import { DecodedData, ExtendedRequest } from '../Interfaces'
+import { DecodedData } from '../Interfaces'
 
 
 dotenv.config({path:path.resolve(__dirname, '../../.env')})
 
+interface TokenRequest extends Request{
+    info?:DecodedData
+}
 
-
-export const verifyToken = (req:ExtendedRequest, res:Response, next:NextFunction) => {
+export const verifyToken = (req:TokenRequest , res:Response, next:NextFunction) => {
     const token = req.headers['token'] as string
     try {
         
@@ -22,7 +24,7 @@ export const verifyToken = (req:ExtendedRequest, res:Response, next:NextFunction
         req.info=dedata
         
     } catch (error:any) {
-        return res.status(403).json({message:error.message})
+        return res.status(403).json(error.message)
     }
     next()
 }

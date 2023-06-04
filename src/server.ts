@@ -1,28 +1,30 @@
-
-
-import express from 'express'
+import express, {json} from 'express'
 import userRoutes from './Routes/userRoutes'
 import cartRoutes from './Routes/cardListRoutes'
 import orderRoutes from './Routes/orderRoutes'
 import productRoutes from './Routes/productRoutes'
-import resetRouter from './Routes/resetRouter';
+import authorouter  from './Routes/authoRoutes'
 
-
+import cors from 'cors'
 
 const app=express()
-app.use(express.json())// middleware
+
+
+app.use(cors())
+app.use(json())// middleware
+
 
 app.use('/users',userRoutes)
 app.use('/products',productRoutes)
 app.use('/cart', cartRoutes)
 app.use('/orders', orderRoutes)
-app.use('/reset', resetRouter);
+app.use('/auth', authorouter)
 
 
 
 
 
-app.listen(4000, ()=>{
+app.listen(8080, ()=>{
     console.log("Server Running...")
 })
 

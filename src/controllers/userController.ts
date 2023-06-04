@@ -1,7 +1,7 @@
 import { Request, RequestHandler, Response } from "express"
 import {v4 as uid} from 'uuid'
 import Bcrypt from 'bcrypt'
-import {LoginSchema, regSchema} from "../Helpers/usersValidation";
+import {RegistrationSchema} from "../Helpers/usersValidation";
 import jwt from 'jsonwebtoken'
 import { User, UserExtendedRequest } from "../Interfaces";
 import {ControllerHelpers} from  '../DatabaseHelpers';
@@ -14,7 +14,7 @@ export const addUser=async(req:Request, res:Response)=>{
         const { userName, fullName,  email, phoneNumber,  password } =req.body
 
         //validate details
-        const {error}= regSchema.validate (req.body)
+        const {error}= RegistrationSchema.validate (req.body)
         if(error){
             return res.status(404).json(error.details[0].message)
         }
@@ -84,8 +84,8 @@ export const updateUser = async(req:Request<{id:string}>,res:Response) =>{
                 return res.status(404).json({message:"User not found"})
 
             }
-            const {userName, fullName, email, phoneNumber, password, urole } = req.body
-            await ControllerHelpers.exec('updateUserDetails' ,{userid:id,userName,fullName,email,phoneNumber,password,urole})
+            const {username, fullname, email, phonenumber, upassword, urole } = req.body
+            await ControllerHelpers.exec('updateUserDetails' ,{userid:id,username,fullname,email,phonenumber,password:upassword,urole})
             return res.status(200).json({message:"User updated successfully"})
         }
         catch(error:any){
@@ -113,35 +113,7 @@ export const deleteUser = async (req:Request<{id:string}> , res:Response) =>{
 }
 
 
-export const loginUser = async(req:Request, res:Response) => {
-        try {
-          
-            const {email,password} = req.body as {email:string, password:string}
-            const {error} =  LoginSchema.validate(req.body)
-            if(error){
-                return res.status(422).json(error.details[0].message)
-            }
-            let user:User []=  (await ControllerHelpers.exec('getUserByemail', { email })).recordset
-            if(!user[0]){
-                return res.status(404).json({messsage:"user not found"})
-            }
-            
-                let validpassword = await Bcrypt.compare(password, user[0].password)
-                if(!validpassword){
-                    return res.status(404).json({message:"passwords do not match"})
-                }
-                const payload = user.map(usr => {
-                    const {password,...rest} = usr
-                    return rest
-                })
-                      
-                const token = jwt.sign(payload[0], <string>process.env.SECRET_KEY, {expiresIn:'127800s'})
-                return res.json({message:"login successfull!!", token, role:user[0].roles,name:user[0].userName})
-                     
-        } catch (error:any) {
-            return res.status(500).json(error.message)
-        }
-}
+
 //reset users
 
 // export const resetPassword = async (req:UserExtendedRequest, res: Response) => {

@@ -1,18 +1,18 @@
 import {Response,RequestHandler,Request} from 'express'
 import {v4 as uid} from 'uuid'
-import { iProducts,productsExtendedRequest } from '../Interfaces'
+import { iProducts,ProductsExtendedRequest } from '../Interfaces'
 import {ControllerHelpers} from  '../DatabaseHelpers';
 
 // add product
-export const addProduct = async(req:productsExtendedRequest, res:Response) => {
+export const addProduct = async(req:ProductsExtendedRequest, res:Response) => {
     try {
-        // console.log(req.info?.roles);
-        if ( req.info && req.info?.roles === 'admin') {   
-      
+        // console.log(req.info);
+        // console.log(req.info?.UROLE)
+        if ( req.info && req.info?.UROLE === 'admin') {     
             let pid = uid()
-            const {pname,pdescription, pimage, price} = req.body
+            const {pname,pdescription, pimage, price, pquantity, pcategory} = req.body
             
-            await ControllerHelpers.exec('addProduct',{pid,pname,pdescription,pimage,price})
+            await ControllerHelpers.exec('addProduct',{pid,pname,pdescription,pimage,pquantity,price, pcategory})
             return res.status(201).json({message:"product added successfully"})
 
         }
@@ -26,10 +26,11 @@ export const addProduct = async(req:productsExtendedRequest, res:Response) => {
 }
 
 // get each product
-export const getProduct:RequestHandler = async(req,res) => {
+export const getProduct = async(req:ProductsExtendedRequest,res:Response) => {
     try {
         const {pid} = req.params
-        let product:iProducts = await(await ControllerHelpers.exec ('getproductByid',{pid})).recordset[0]
+        let product:iProducts = await(await ControllerHelpers.exec('getproductByid',{pid})).recordset[0]
+        //console.log(product)
         if(!product){
             return res.status(404).json({message:"product not exists"})
         }
@@ -52,7 +53,7 @@ export const getallProducts = async(req:Request, res:Response) => {
 }
 
 
-export const UpdateProduct =  async(req:productsExtendedRequest, res:Response) => {
+export const UpdateProduct =  async(req:ProductsExtendedRequest, res:Response) => {
 
     try {
         const {pid} = req.params
@@ -62,9 +63,9 @@ export const UpdateProduct =  async(req:productsExtendedRequest, res:Response) =
         if(!product.length){
             return res.status(404).json({message:"product not exists"})
         }
-        const {pname, pdescription, pimage, price} = req.body
-        if ( req.info && req.info?.roles === 'admin') {
-            await ControllerHelpers.exec('updateProduct',{pid,pname,pdescription,pimage,price})
+        const {pname, pdescription, pimage, price, pquantity, pcategory} = req.body
+        if ( req.info && req.info!.UROLE === 'admin') {
+            await ControllerHelpers.exec('updateProduct',{pid,pname,pdescription,pimage,pquantity,price,pcategory})
             return res.status(200).json({message:"product updated successfully"})
     }else{
         return res.status(403).json({ message: 'Access denied' });
@@ -76,7 +77,7 @@ export const UpdateProduct =  async(req:productsExtendedRequest, res:Response) =
 }
 
 
-export const deleteProduct = async(req:productsExtendedRequest, res:Response) => {
+export const deleteProduct = async(req:ProductsExtendedRequest, res:Response) => {
 
     try {
        
@@ -87,16 +88,9 @@ export const deleteProduct = async(req:productsExtendedRequest, res:Response) =>
             return res.status(404).json({message:"product not exists"})
         }
 
-        if ( req.info && req.info?.roles === 'admin') {
-
-        
-            await(await ControllerHelpers.exec ('deleteProduct',{pid})).recordset
-
-        // await pool.request()
-        // .input('pid',id)
-        // .execute('deleteProduct')
-
-        return res.status(200).json({message:"product deleted successfully"})
+        if ( req.info && req.info!.UROLE === 'admin') {        
+            await(await ControllerHelpers.exec('deleteProduct',{pid})).recordset
+            return res.status(200).json({message:"product deleted successfully"})
         }else{
             return res.status(403).json({ message: 'Access denied' });
         }
