@@ -86,3 +86,4 @@ export const HomePage = async(req:UserExtendedRequest, res:Response) => {
         return res.status(500).json(error)
     }
 }
+

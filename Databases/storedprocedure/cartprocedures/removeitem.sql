@@ -4,3 +4,9 @@ BEGIN
 	DELETE * FROM Cartbasket WHERE PID=@pid
 END
 EXEC removeItemfromCart '2329'
+
+CREATE OR ALTER PROCEDURE clearCartItems(@cid VARCHAR(200))
+AS
+BEGIN
+	UPDATE Cartbasket SET ISDELETED=0 WHERE CID = @cid
+END

@@ -102,18 +102,18 @@ GET http://localhost:8080/products/2327
 
 #####
 /// update product
-PUT http://localhost:8080/products/2327
+PUT http://localhost:8080/products/2324
 Content-Type:application/json
-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVU0VSSUQiOiI0ODQwODE2Ni02M2VlLTQwNmMtOWZkNy05MjcwZjVhNTY3NjYiLCJVU0VSTkFNRSI6ImJvYm8iLCJGVUxMTkFNRSI6IkpveWNlIFdhbWJ1aSAiLCJFTUFJTCI6ImJvYm81NkBnbWFpbC5jb20iLCJQSE9ORU5VTUJFUiI6NzI5MDU0MzIzLCJVUk9MRSI6ImFkbWluIiwiSVNERUxFVEVEIjowLCJFTUFJTFNFTlQiOjAsImlhdCI6MTY4NTc4MTc1MywiZXhwIjoxNjg1OTA5NTUzfQ.GIdc2yLrCbVndxzEJ09Pr7xHR0SLTbFtVmSHUj6eknU 
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVU0VSSUQiOiI0ODQwODE2Ni02M2VlLTQwNmMtOWZkNy05MjcwZjVhNTY3NjYiLCJVU0VSTkFNRSI6ImJvYm8iLCJGVUxMTkFNRSI6IkpveWNlIFdhbWJ1aSAiLCJFTUFJTCI6ImJvYm81NkBnbWFpbC5jb20iLCJQSE9ORU5VTUJFUiI6NzI5MDU0MzIzLCJVUk9MRSI6ImFkbWluIiwiSVNERUxFVEVEIjowLCJFTUFJTFNFTlQiOjAsImlhdCI6MTY4NTk0Nzc5NSwiZXhwIjoxNjg2MDc1NTk1fQ.0V3yt1QYeYagSpaF40rpVxSxHKtmmoNNk2Ry1WGFW7Y
 
 {
     
-    "pname": "Mouse",
-    "pdescription": "Flexible mouse clicks",
-    "pimage": "link",
+    "pname": "Keyboard",
+    "pdescription": "Flexible Qwerty keyboard",
+    "pimage": "https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.cnet.com%2Fa%2Fimg%2Fresize%2Fc2fb79b15d18f335e85fc4acd72910059cc9758b%2Fhub%2F2021%2F08%2F20%2F453e37bf-61cb-4e16-ad90-fd822bdc390a%2Fkeychron-k3-mechanical-keyboard.jpg%3Fauto%3Dwebp%26fit%3Dcrop%26height%3D900%26width%3D1200&tbnid=wkSaqhfXcyM9GM&vet=12ahUKEwisgYDIxKv_AhUXpycCHcBXDfsQMygLegUIARC4Ag..i&imgrefurl=https%3A%2F%2Fwww.cnet.com%2Ftech%2Fcomputing%2Fbest-keyboard%2F&docid=xTRdHjAsSuPj5M&w=1200&h=900&q=keyboard&ved=2ahUKEwisgYDIxKv_AhUXpycCHcBXDfsQMygLegUIARC4Ag",
     "pquantity": 700,
     "price": 100,
-    "pcategory": "incentives"
+    "pcategory": "peripherals"
     
 }
 
@@ -133,8 +133,7 @@ POST http://localhost:8080/cart/2327
 Content-Type: application/json
 
 
-{
-  
+{  
     "email":"skm55@gmail.com"
 }
 
@@ -158,7 +157,7 @@ Content-Type: application/json
 #####
 
 // remove item from list
-DELETE http://localhost:8080/cart/2327
+DELETE http://localhost:8080/cart/7fa7dcb1-f22f-4a0a-9db4-bb19e7b160d4
 
 ###
 POST http://localhost:8080/orders

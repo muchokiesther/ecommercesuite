@@ -75,3 +75,13 @@ export const removeCartItem = async (req:CartExtendedRequest, res: Response) => 
     }
   };
   
+
+  export const clearCart = async(req:CartExtendedRequest, res:Response) => {
+    try {
+        const {cid} = req.params
+        await ControllerHelpers.exec('clearCartItems', {cid})
+        return res.status(200).json({message: "cart cleared"})
+    } catch (error:any) {
+        return 
+    }
+  }
