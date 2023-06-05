@@ -1,56 +1,78 @@
 
-###
-POST   http://localhost:4000/users
+#####
+// registering a user
+POST   http://localhost:8080/auth/sign-up
 Content-Type: application/json
 
-
 {
-    "userName":"wamuyuu",
-    "fullName":"Sam k muchoki ",
-    "email":"kiambiIii@gmail.com",
-    "phoneNumber":"0788912323",
-    "password":"Wamuyu@2023"
+     "username":"bobo",
+    "fullname":"Joyce Wambui ",
+    "email":"bobo56@gmail.com",
+    "phonenumber":"0729054323",
+    "upassword":"Wamuyu@2023",
+    "confirmpassword": "Wamuyu@2023"
+
 }
 
+# {
+#     "username":"Njamba",
+#     "fullname":"Sam k muchoki ",
+#     "email":"skm55@gmail.com",
+#     "phonenumber":"0788912323",
+#     "upassword":"Wamuyu@2023",
+#     "confirmpassword": "Wamuyu@2023"
+# }
 
-###
-GET   http://localhost:4000/users
+
+#####
+// returns all users data
+GET   http://localhost:8080/users
 
 
 ###
 //getting user by email
-GET http://localhost:4000/users/email/kiambii@gmail.com
+
+GET http://localhost:8080/users/email/skm55@gmail.com
 
 
-###
-GET   http://localhost:4000/users/20655c92-23c7-4a0b-9089-005444745331
+
+######
+//get user by id
+GET   http://localhost:8080/users/e7169ece-6b36-4bb8-b646-deb11b3d8841
 
 
-###
-
-PUT  http://localhost:4000/users/0587154f-8765-4b17-9a85-514f4bd87c03
+#####
+// update user dtails
+PUT  http://localhost:8080/users/48408166-63ee-406c-9fd7-9270f5a56766
 Content-Type: application/json
 
 {
-    "userName":"george k Githaiga",
-    "fullName":"George88 ",
-    "email":"ggk8@gmail.com",
-    "phoneNumber":"0712123556",
-    "password":"12456789"
+    
+    "username":"bobo",
+    "fullname":"Joyce Wambui ",
+    "email":"bobo56@gmail.com",
+    "phonenumber":"0729054323",
+    "upassword":"Wamuyu@2023",
+    "urole": "admin"
 }
 
-###
-DELETE http://localhost:4000/users/147baaa3-803c-4b36-84ab-6cf4aa12c637
+
+#####
+// delete user details
+DELETE http://localhost:8080/users/1
 
 
-###
-POST http://localhost:4000/users/login
-Content-Type:   application/json
+
+######
+// login user
+POST http://localhost:8080/auth/login/
+Content-Type: application/json
 
 {
-    "password":"Wamuyu@2023",
-    "email":"kiambii@gmail.com"
-      
+    
+    "email":"bobo56@gmail.com",
+    "upassword":"Wamuyu@2023"
+
 }
 
 
@@ -58,140 +80,127 @@ Content-Type:   application/json
 
 #####
 /// products endpoints
-POST http://localhost:4000/products
+POST http://localhost:8080/products
 Content-Type: application/json
-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkYjg3N2UyLTI2ODUtNGUxNy1hOGZhLTcwNzNkMjU1MGQ0MyIsInVzZXJOYW1lIjoiQURNSU4iLCJmdWxsTmFtZSI6IkVzdGhlciBNdWNob2tpICIsImVtYWlsIjoiYWRtaW4yMDIzQGdtYWlsLmNvbSIsInJvbGVzIjoiYWRtaW4iLCJlbWFpbFNlbnQiOjEsImlzUmVzZXQiOjAsImlhdCI6MTY4NDMyNzU2NywiZXhwIjoxNjg0NTAwMzY3fQ.EkTj1LUcbqwfdVvLfu0UlsGU6od95tHadZP7RNwnfyY 
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVU0VSSUQiOiI0ODQwODE2Ni02M2VlLTQwNmMtOWZkNy05MjcwZjVhNTY3NjYiLCJVU0VSTkFNRSI6ImJvYm8iLCJGVUxMTkFNRSI6IkpveWNlIFdhbWJ1aSAiLCJFTUFJTCI6ImJvYm81NkBnbWFpbC5jb20iLCJQSE9ORU5VTUJFUiI6NzI5MDU0MzIzLCJVUk9MRSI6ImFkbWluIiwiSVNERUxFVEVEIjowLCJFTUFJTFNFTlQiOjAsImlhdCI6MTY4NTc4MTc1MywiZXhwIjoxNjg1OTA5NTUzfQ.GIdc2yLrCbVndxzEJ09Pr7xHR0SLTbFtVmSHUj6eknU 
 
 
 {
-    "pname":"clown",
-    "pdescription": "Self care ackage on discount",
+    "pname":"Super Load Bread",
+    "pdescription": "Never say bread, say superloaf",
     "pimage": "link",
-    "price": 2000
+    "price": 200,
+    "pquantity": 2000,
+    "pcategory": "snacks & eatables"
 }
 
 #####
 /// get all products
-GET http://localhost:4000/products
+GET http://localhost:8080/products
 
 
 #####
 /// get each product
-GET http://localhost:4000/products/852d7eea-2f97-4760-84cf-1b84ba206449
+GET http://localhost:8080/products/2327
+
+
 #####
 /// update product
-PUT http://localhost:4000/products/d40cbb8c-f740-4a60-81f3-7fbd0d60cd9c
+PUT http://localhost:8080/products/2324
 Content-Type:application/json
-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkYjg3N2UyLTI2ODUtNGUxNy1hOGZhLTcwNzNkMjU1MGQ0MyIsInVzZXJOYW1lIjoiQURNSU4iLCJmdWxsTmFtZSI6IkVzdGhlciBNdWNob2tpICIsImVtYWlsIjoiYWRtaW4yMDIzQGdtYWlsLmNvbSIsInJvbGVzIjoiYWRtaW4iLCJlbWFpbFNlbnQiOjEsImlzUmVzZXQiOjAsImlhdCI6MTY4NDM1OTI3OCwiZXhwIjoxNjg0NTMyMDc4fQ.URC4KNMHKEodhYyRV0z1qm_ghn4-KRuzxNElDHm_jfM
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVU0VSSUQiOiI0ODQwODE2Ni02M2VlLTQwNmMtOWZkNy05MjcwZjVhNTY3NjYiLCJVU0VSTkFNRSI6ImJvYm8iLCJGVUxMTkFNRSI6IkpveWNlIFdhbWJ1aSAiLCJFTUFJTCI6ImJvYm81NkBnbWFpbC5jb20iLCJQSE9ORU5VTUJFUiI6NzI5MDU0MzIzLCJVUk9MRSI6ImFkbWluIiwiSVNERUxFVEVEIjowLCJFTUFJTFNFTlQiOjAsImlhdCI6MTY4NTk0Nzc5NSwiZXhwIjoxNjg2MDc1NTk1fQ.0V3yt1QYeYagSpaF40rpVxSxHKtmmoNNk2Ry1WGFW7Y
 
 {
-    "pname": "Grape",
-    "pdescription": "straight from the fisher's hook",
-    "pimage": "link",
-    "price": 70
+    
+    "pname": "Keyboard",
+    "pdescription": "Flexible Qwerty keyboard",
+    "pimage": "https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.cnet.com%2Fa%2Fimg%2Fresize%2Fc2fb79b15d18f335e85fc4acd72910059cc9758b%2Fhub%2F2021%2F08%2F20%2F453e37bf-61cb-4e16-ad90-fd822bdc390a%2Fkeychron-k3-mechanical-keyboard.jpg%3Fauto%3Dwebp%26fit%3Dcrop%26height%3D900%26width%3D1200&tbnid=wkSaqhfXcyM9GM&vet=12ahUKEwisgYDIxKv_AhUXpycCHcBXDfsQMygLegUIARC4Ag..i&imgrefurl=https%3A%2F%2Fwww.cnet.com%2Ftech%2Fcomputing%2Fbest-keyboard%2F&docid=xTRdHjAsSuPj5M&w=1200&h=900&q=keyboard&ved=2ahUKEwisgYDIxKv_AhUXpycCHcBXDfsQMygLegUIARC4Ag",
+    "pquantity": 700,
+    "price": 100,
+    "pcategory": "peripherals"
+    
 }
 
 
 #####
 /// delete product
-DELETE http://localhost:4000/products/852d7eea-2f97-4760-84cf-1b84ba206449
+DELETE http://localhost:8080/products/35820bc6-b405-4afe-9ea2-8b96f1c073e2
 Content-Type:application/json
-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkYjg3N2UyLTI2ODUtNGUxNy1hOGZhLTcwNzNkMjU1MGQ0MyIsInVzZXJOYW1lIjoiQURNSU4iLCJmdWxsTmFtZSI6IkVzdGhlciBNdWNob2tpICIsImVtYWlsIjoiYWRtaW4yMDIzQGdtYWlsLmNvbSIsInJvbGVzIjoiYWRtaW4iLCJlbWFpbFNlbnQiOjEsImlzUmVzZXQiOjAsImlhdCI6MTY4NDM1OTI3OCwiZXhwIjoxNjg0NTMyMDc4fQ.URC4KNMHKEodhYyRV0z1qm_ghn4-KRuzxNElDHm_jfM
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVU0VSSUQiOiI0ODQwODE2Ni02M2VlLTQwNmMtOWZkNy05MjcwZjVhNTY3NjYiLCJVU0VSTkFNRSI6ImJvYm8iLCJGVUxMTkFNRSI6IkpveWNlIFdhbWJ1aSAiLCJFTUFJTCI6ImJvYm81NkBnbWFpbC5jb20iLCJQSE9ORU5VTUJFUiI6NzI5MDU0MzIzLCJVUk9MRSI6ImFkbWluIiwiSVNERUxFVEVEIjowLCJFTUFJTFNFTlQiOjAsImlhdCI6MTY4NTc4MTc1MywiZXhwIjoxNjg1OTA5NTUzfQ.GIdc2yLrCbVndxzEJ09Pr7xHR0SLTbFtVmSHUj6eknU 
 
 
 
 
 #####
 // add to cart
-POST http://localhost:4000/cart/125
+POST http://localhost:8080/cart/2327
 Content-Type: application/json
 
 
-{
-  
-    "pname": "skims",
-    "pdescription": "A cloth that fits anyone ",
-    "price": 50
+{  
+    "email":"skm55@gmail.com"
 }
 
 
 #####
 // view cart items
-GET http://localhost:4000/cart
+GET http://localhost:8080/cart
 
 
 #####
 // update cart
-//change the pid to be user email
-PUT http://localhost:4000/cart/125
+PUT http://localhost:8080/cart/7f2bdc5a-224e-4799-a288-1407d98d558a
 Content-Type: application/json
 
 
 {
-    "pname": "dozen",
-    "pdescription": "A  curry thick glaze",
-    "price": 50
+    "pid": "2324",
+    "pcount": 12
     
 }
-#####
 
+
+#####
 // remove item from list
-DELETE http://localhost:4000/cart/55
+DELETE http://localhost:8080/cart/7fa7dcb1-f22f-4a0a-9db4-bb19e7b160d4
 
 ###
-POST http://localhost:4000/orders
+POST http://localhost:8080/orders
 Content-Type: application/json
 
-{   
-    "pname": "Graps",
-    "pdescription": "straight from the farm",
-    "pimage": "link",
-    "price": 90,
-    "pcount":5,
-     "orderStatus":"deleivered"
-   
-    
-  
+
+{
+    "cid": "7fa7dcb1-f22f-4a0a-9db4-bb19e7b160d4"
 }
-
-###
-
-GET http://localhost:4000/orders/f290e2e7-32a6-4678-91ea-651b607106f1
-
-
-###
-DELETE http://localhost:4000/orders/75456aab-443b-42b1-bd39-7b1832646627
-
 
 ####
 // get all 
-GET http://localhost:4000/orders
+GET http://localhost:8080/orders
 
-###
-PUT http://localhost:4000/orders/f290e2e7-32a6-4678-91ea-651b607106f1
+
+#####
+// get orders by id
+GET http://localhost:8080/orders/2f54b1e1-fb01-44e8-891e-2275d6de379a
+
+
+
+#####
+DELETE http://localhost:8080/orders/75456aab-443b-42b1-bd39-7b1832646627
+
+
+######
+PUT http://localhost:8080/orders/2f54b1e1-fb01-44e8-891e-2275d6de379a
 Content-Type: application/json
-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkYjg3N2UyLTI2ODUtNGUxNy1hOGZhLTcwNzNkMjU1MGQ0MyIsInVzZXJOYW1lIjoiQURNSU4iLCJmdWxsTmFtZSI6IkVzdGhlciBNdWNob2tpICIsImVtYWlsIjoiYWRtaW4yMDIzQGdtYWlsLmNvbSIsInJvbGVzIjoiYWRtaW4iLCJlbWFpbFNlbnQiOjEsImlzUmVzZXQiOjAsImlhdCI6MTY4NDMyNTI1NywiZXhwIjoxNjg0NDk4MDU3fQ.SKXodM_iaoWUQtwCjCXSFPstQVsHS3VNttFDY2ZtrJw
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVU0VSSUQiOiI0ODQwODE2Ni02M2VlLTQwNmMtOWZkNy05MjcwZjVhNTY3NjYiLCJVU0VSTkFNRSI6ImJvYm8iLCJGVUxMTkFNRSI6IkpveWNlIFdhbWJ1aSAiLCJFTUFJTCI6ImJvYm81NkBnbWFpbC5jb20iLCJQSE9ORU5VTUJFUiI6NzI5MDU0MzIzLCJVUk9MRSI6ImFkbWluIiwiSVNERUxFVEVEIjowLCJFTUFJTFNFTlQiOjAsImlhdCI6MTY4NTc4MTc1MywiZXhwIjoxNjg1OTA5NTUzfQ.GIdc2yLrCbVndxzEJ09Pr7xHR0SLTbFtVmSHUj6eknU 
+
 
 {   
-      "pid": "3856a7bd-f974-4625-b43d-6b448a78a62e",
-    "pname": "frions",
-    "price": 210,
-    "pcount": 150,
-    "orderStatus":"deleivered"
+    "orderstatus":"Processing"
 }
 
 
-###
-PATCH  https://localhost:8000/reset/forgotPassword?email=mucho.ijones@gmail.com
 
-###
 
-PUT http://localhost:4000/reset/email
-Content-Type: application/json
 
-{
-    "email":"muchok8@gmail.com",
-    "password":"123Wamuuuu56@"
-}
 
 

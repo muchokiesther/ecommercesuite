@@ -3,5 +3,3 @@ AS
 BEGIN
 UPDATE Products SET isDeleted=1 WHERE PID=@pid 
 END
-
-EXEC deleteProduct '234'

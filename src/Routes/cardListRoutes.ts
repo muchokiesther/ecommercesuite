@@ -4,10 +4,10 @@ import {addItemtoCart, viewCartItems, updateCartItems, removeCartItem} from '../
 const cartRoutes = Router()
 
 // url routes
-cartRoutes.post('/:id', addItemtoCart)
+cartRoutes.post('/:pid', addItemtoCart)
 cartRoutes.get('', viewCartItems)
-cartRoutes.put('/:id', updateCartItems)
-cartRoutes.delete('/:id', removeCartItem)
+cartRoutes.put('/:cid', updateCartItems)
+cartRoutes.delete('/:pid', removeCartItem)
 
 
 export default cartRoutes

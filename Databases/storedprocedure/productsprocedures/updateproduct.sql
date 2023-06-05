@@ -3,10 +3,10 @@ CREATE OR ALTER PROCEDURE updateProduct(
     @pname VARCHAR(155), 
     @pdescription VARCHAR(155), 
     @pimage VARCHAR(1000), 
-    @price INT)
+    @pquantity INT,
+    @price INT,
+    @pcategory VARCHAR(155))
 AS 
 BEGIN
-UPDATE Products SET PNAME=@pname, PDESCRIPTION=@pdescription, PIMAGE=@pimage, PRICE=@price WHERE PID=@pid AND isDeleted=0
+UPDATE Products SET PNAME=@pname, PDESCRIPTION=@pdescription, PIMAGE=@pimage, PQUANTITY=@pquantity, PRICE=@price, PCATEGORY=@pcategory WHERE PID=@pid AND isDeleted=0
 END
-
-EXEC updateProduct @pid='23423', @pname='Shindano', @pdescription='nda thagereirie ithegereriano', @pimage='link', @price=2334
