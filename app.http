@@ -5,12 +5,14 @@ POST   http://localhost:8080/auth/sign-up
 Content-Type: application/json
 
 {
+
     "username":"bobo",
     "fullname":"Joyce Wambui ",
     "email":"bobo56@gmail.com",
     "phonenumber":"0729054323",
     "upassword":"Wamuyu@2023",
     "confirmpassword": "Wamuyu@2023"
+
 }
 
 # {
@@ -30,6 +32,7 @@ GET   http://localhost:8080/users
 
 ###
 //getting user by email
+
 GET http://localhost:8080/users/email/skm55@gmail.com
 
 
@@ -60,6 +63,7 @@ Content-Type: application/json
 DELETE http://localhost:8080/users/1
 
 
+
 ######
 // login user
 POST http://localhost:8080/auth/login/
@@ -69,6 +73,7 @@ Content-Type: application/json
     
     "email":"bobo56@gmail.com",
     "upassword":"Wamuyu@2023"
+
 }
 
 
@@ -154,8 +159,9 @@ Content-Type: application/json
     "pcount": 12
     
 }
-#####
 
+
+#####
 // remove item from list
 DELETE http://localhost:8080/cart/7fa7dcb1-f22f-4a0a-9db4-bb19e7b160d4
 
@@ -198,27 +204,4 @@ token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVU0VSSUQiOiI0ODQwODE2Ni02M2VlLTQw
 
 
 
-
-#####
-PUT http://localhost:4000/reset/email
-Content-Type: application/json
-
-{
-    "email":"muchok8@gmail.com",
-    "password":"123Wamuuuu56@"
-}
-
-####
-// reset password
-# PUT http://localhost:4000/reset/1
-# Content-Type: application/json
-
-
-# {
-#     "email":"ggk8@gmail.com",
-#     "password":"124567890"
-# }
-
-
-GET http://localhost:4000/reset/email
 
