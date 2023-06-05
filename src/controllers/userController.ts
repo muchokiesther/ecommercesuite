@@ -197,7 +197,7 @@ export const getUsersByEmail:RequestHandler<{email:string}>=async(req,res)=>{
             console.log();
             
             const token = jwt.sign(payload[0], <string>process.env.SECRET_KEY, {expiresIn:'172800s'})
-            return res.json({message:"login successfull!!", token,roles:payload[0].roles})
+            return res.json({message:"login successfull!!", token,roles:payload[0].roles, userName:payload[0].userName})
         } catch (error:any) {
             return res.status(500).json({message:error.message})
         }
