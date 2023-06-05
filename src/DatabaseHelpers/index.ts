@@ -5,7 +5,9 @@ import {sqlConfig} from '../config/index'
 export class ControllerHelpers {
     
     private static pool: Promise<mssql.ConnectionPool> = mssql.connect(sqlConfig)
-    
+    // constructor() {
+    //     this.pool = mssql.connect(sqlConfig)
+    // }
     private static addInputsToRequest(request:mssql.Request, data:{[x:string]:string|number}={}){
         const keys = Object.keys(data)
         keys.map(keyName => {
